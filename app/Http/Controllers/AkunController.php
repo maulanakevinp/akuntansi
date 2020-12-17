@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AkunRequest;
 use App\Models\Akun;
+use App\Models\JurnalUmum;
 use Illuminate\Http\Request;
 
 class AkunController extends Controller
@@ -77,7 +78,8 @@ class AkunController extends Controller
      */
     public function show(Akun $akun)
     {
-        return abort(404);
+        $jurnal_umum = JurnalUmum::where('akun_id', $akun->id)->orderBy('tanggal')->paginate(10);
+        return view('akun.show', compact('akun','jurnal_umum'));
     }
 
     /**
@@ -131,5 +133,23 @@ class AkunController extends Controller
         return response()->json([
             'message'   => 'Akun berhasil dihapus'
         ]);
+    }
+
+    public function laporan(Request $request, Akun $akun)
+    {
+        $request->validate([
+            'awal'  => ['required','date'],
+            'akhir' => ['required','date'],
+        ]);
+
+        if (!$request->awal || !$request->akhir) {
+            return redirect()->route('jurnal-umum.index');
+        }
+
+        $from = $request->awal;
+        $to = $request->akhir;
+        $jurnal_umum = JurnalUmum::where('akun_id', $akun->id)->whereBetween('tanggal', [$from, $to])->orderBy('tanggal')->get();
+
+        return view('akun.laporan', compact('akun','jurnal_umum'));
     }
 }

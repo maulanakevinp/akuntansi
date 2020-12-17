@@ -8,4 +8,9 @@ class Akun extends Model
 {
     protected $table    = 'akun';
     protected $guarded  = [];
+
+    public function jurnal_umum()
+    {
+        return $this->hasMany(JurnalUmum::class);
+    }
 }

@@ -60,11 +60,11 @@
                                 <td style="vertical-align: middle">
                                     <a href="{{ route('jurnal-umum.edit', $item) }}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
                                     @if($item->bukti)<a href="{{ route('jurnal-umum.show', $item) }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Download Bukti"><i class="fas fa-download"></i></a>@endif
-                                    <a class="btn btn-sm btn-danger hapus-data" data-nama="{{ $item->nama }}" data-action="{{ route("jurnal-umum.destroy", $item) }}" data-toggle="tooltip" title="Hapus" href="#modal-hapus"><i class="fas fa-trash"></i></a>
+                                    <a class="btn btn-sm btn-danger hapus-data" data-nama="{{ $item->keterangan }}" data-action="{{ route("jurnal-umum.destroy", $item) }}" data-toggle="tooltip" title="Hapus" href="#modal-hapus"><i class="fas fa-trash"></i></a>
                                 </td>
                                 <td style="vertical-align: middle; text-align: center">{{ $item->tanggal }}</td>
                                 <td style="vertical-align: middle">{{ $item->keterangan }}</td>
-                                <td style="vertical-align: middle; text-align: center"><span data-toggle="tooltip" title="{{ $item->akun->nama }}">{{ $item->akun->kode }}</span></td>
+                                <td style="vertical-align: middle; text-align: center"><a href="{{ route('akun.show', $item->akun_id) }}" data-toggle="tooltip" title="{{ $item->akun->nama }}">{{ $item->akun->kode }}</a></td>
                                 <td style="vertical-align: middle; text-align: right">{{ $item->akun->post_saldo == 1 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>
                                 <td style="vertical-align: middle; text-align: right">{{ $item->akun->post_saldo == 2 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>
                             </tr>
