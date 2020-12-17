@@ -32,5 +32,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::delete('akun/destroys', 'AkunController@destroys')->name('akun.destroys');
     Route::resource('akun', 'AkunController');
+
+    Route::get('jurnal-umum/laporan', 'JurnalUmumController@laporan')->name('jurnal-umum.laporan');
+    Route::delete('jurnal-umum/delete/{jurnal_umum}', 'JurnalUmumController@delete')->name('jurnal-umum.delete');
+    Route::delete('jurnal-umum/destroys', 'JurnalUmumController@destroys')->name('jurnal-umum.destroys');
+    Route::resource('jurnal-umum', 'JurnalUmumController');
 });
 

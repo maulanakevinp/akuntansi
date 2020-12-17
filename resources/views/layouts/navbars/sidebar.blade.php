@@ -55,16 +55,7 @@
                 </div>
             </div>
             <!-- Form -->
-            <form class="mt-4 mb-3 d-md-none">
-                <div class="input-group input-group-rounded input-group-merge">
-                    <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="{{ __('Search') }}" aria-label="Search">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <span class="fa fa-search"></span>
-                        </div>
-                    </div>
-                </div>
-            </form>
+            @yield('form-search-mobile')
             <!-- Navigation -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -75,6 +66,11 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->segment(1) == 'akun' ? 'active' : '' }}" href="{{ route('akun.index') }}">
                         <i class="ni ni-bullet-list-67 text-success"></i> {{ __('Kelola Akun') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->segment(1) == 'jurnal-umum' ? 'active' : '' }}" href="{{ route('jurnal-umum.index') }}">
+                        <i class="ni ni-bullet-list-67 text-info"></i> {{ __('Kelola Jurnal Umum') }}
                     </a>
                 </li>
             </ul>

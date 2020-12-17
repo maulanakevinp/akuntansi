@@ -21,6 +21,21 @@ class AkunController extends Controller
             $akun = Akun::where('nama','like',"%{$request->cari}%")
                             ->orWhere('kode','like',"%{$request->cari}%")
                             ->orderBy('kode')->paginate(10);
+            if ($request->cari == 'debit') {
+                $akun = Akun::where('post_saldo', 1)->orderBy('kode')->paginate(10);
+            }
+
+            if ($request->cari == 'kredit') {
+                $akun = Akun::where('post_saldo', 2)->orderBy('kode')->paginate(10);
+            }
+
+            if ($request->cari == 'neraca') {
+                $akun = Akun::where('post_laporan', 1)->orderBy('kode')->paginate(10);
+            }
+
+            if ($request->cari == 'laba rugi') {
+                $akun = Akun::where('post_laporan', 2)->orderBy('kode')->paginate(10);
+            }
         }
 
         $akun->appends($request->only('cari'));

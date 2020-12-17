@@ -2,29 +2,11 @@
 @section('judul','Akun - Sistem Informasi Akuntansi')
 
 @section('form-search')
-<form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto" action="{{ URL::current() }}" method="GET">
-    <div class="form-group mb-0">
-        <div class="input-group input-group-alternative">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-search"></i></span>
-            </div>
-            <input class="form-control" placeholder="Cari ...." type="search" name="cari" value="{{ request('cari') }}">
-        </div>
-    </div>
-</form>
+    @include('layouts.navbars.form-search')
 @endsection
 
 @section('form-search-mobile')
-<form class="mt-4 mb-3 d-md-none" action="{{ URL::current() }}" method="GET">
-    <div class="input-group input-group-rounded input-group-merge">
-        <input type="search" name="cari" class="form-control form-control-rounded form-control-prepended" placeholder="cari" aria-label="cari" value="{{ request('cari') }}">
-        <div class="input-group-prepend">
-            <div class="input-group-text">
-                <span class="fa fa-search"></span>
-            </div>
-        </div>
-    </div>
-</form>
+    @include('layouts.navbars.form-search-mobile')
 @endsection
 
 @section('content')
