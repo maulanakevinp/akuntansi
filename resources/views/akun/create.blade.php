@@ -1,0 +1,94 @@
+@extends('layouts.app')
+@section('judul','Tambah Akun - Sistem Informasi Akuntansi')
+
+@section('content')
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card shadow h-100">
+                    <div class="card-header border-0">
+                        <div class="d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-between text-center text-md-left">
+                            <div class="mb-3">
+                                <h2 class="mb-0">Tambah Akun</h2>
+                                <p class="mb-0 text-sm">Kelola Akun</p>
+                            </div>
+                            <div class="mb-3">
+                                <a href="{{ route("akun.index") }}" class="btn btn-success" data-toggle="tooltip" title="Kembali"><i class="fas fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt--7">
+    <div class="card bg-secondary shadow h-100">
+        <div class="card-body">
+            <form autocomplete="off" action="{{ route('akun.store') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group row">
+                    <label class="form-control-label col-form-label col-md-3" for="kelompok_akun_id">Kelompok Akun</label>
+                    <div class="col-md-9">
+                        <select class="form-control" name="kelompok_akun_id">
+                            @foreach (App\Models\KelompokAkun::all() as $item)
+                                <option value="{{ $item->id }}" {{ old('kelompok_akun_id') == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                            @endforeach
+                        </select>
+                        <span class="invalid-feedback font-weight-bold"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="form-control-label col-form-label col-md-3" for="kode">Kode</label>
+                    <div class="col-md-9">
+                        <input type="number" class="form-control" name="kode" placeholder="Masukkan Kode ..." value="{{ old('kode')}}">
+                        <span class="invalid-feedback font-weight-bold"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="form-control-label col-form-label col-md-3" for="nama">Nama</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama ..." value="{{ old('nama')}}">
+                        <span class="invalid-feedback font-weight-bold"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="form-control-label col-form-label col-md-3" for="post_saldo">Post Saldo</label>
+                    <div class="col-md-9">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="post_saldo1" name="post_saldo" class="custom-control-input" value="1" {{ old('post_saldo') == 1 ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="post_saldo1">Debit</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="post_saldo2" name="post_saldo" class="custom-control-input" value="2" {{ old('post_saldo') == 2 ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="post_saldo2">Kredit</label>
+                        </div>
+                        <span class="invalid-feedback font-weight-bold d-block"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="form-control-label col-form-label col-md-3" for="post_laporan">Post Laporan</label>
+                    <div class="col-md-9">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="post_laporan1" name="post_laporan" class="custom-control-input" value="1" {{ old('post_laporan') == 1 ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="post_laporan1">Neraca</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="post_laporan2" name="post_laporan" class="custom-control-input" value="2" {{ old('post_laporan') == 2 ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="post_laporan2">Laba Rugi</label>
+                        </div>
+                        <span class="invalid-feedback font-weight-bold d-block"></span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="simpan">SIMPAN</button>
+            </form>
+        </div>
+    </div>
+    @include('layouts.footers.auth')
+</div>
+@endsection
+
+@push('js')
+<script src="{{ asset('assets/js/form.js') }}"></script>
+@endpush
