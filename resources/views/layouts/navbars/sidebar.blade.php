@@ -78,6 +78,11 @@
                         <i class="ni ni-bullet-list-67 text-yellow"></i> {{ __('Kelola Buku Besar') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->segment(1) == 'neraca-lajur' ? 'active' : '' }}" href="{{ route('neraca-lajur.index') }}">
+                        <i class="ni ni-bullet-list-67 text-warning"></i> {{ __('Neraca Lajur') }}
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

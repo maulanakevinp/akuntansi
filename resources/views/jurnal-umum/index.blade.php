@@ -41,15 +41,17 @@
             <div class="table-responsive">
                 <table class="table table-hover table-sm table-striped table-bordered">
                     <thead>
-                        <th class="text-center" width="20px">
-                            <input type="checkbox" class="jurnal-umum-checkbox" id="check_all">
-                        </th>
-                        <th class="text-center" width="20px">Opsi</th>
-                        <th class="text-center">Tanggal</th>
-                        <th class="text-center">Keterangan</th>
-                        <th class="text-center">Akun</th>
-                        <th class="text-center">Debit</th>
-                        <th class="text-center">Kredit</th>
+                        <tr>
+                            <th class="text-center" width="20px">
+                                <input type="checkbox" class="jurnal-umum-checkbox" id="check_all">
+                            </th>
+                            <th class="text-center" width="20px">Opsi</th>
+                            <th class="text-center"><a href="{{ request('tanggal') == 1 ? URL::current() . '?tanggal=0' : URL::current() . '?tanggal=1' }}">Tanggal {!! request('tanggal') == 1 ? '<i class="fas fa-caret-up"></i>' : '<i class="fas fa-caret-down"></i>' !!}</a></th>
+                            <th class="text-center">Keterangan</th>
+                            <th class="text-center">Akun</th>
+                            <th class="text-center">Debit</th>
+                            <th class="text-center">Kredit</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @forelse ($jurnal_umum as $item)
@@ -65,8 +67,8 @@
                                 <td style="vertical-align: middle; text-align: center">{{ $item->tanggal }}</td>
                                 <td style="vertical-align: middle">{{ $item->keterangan }}</td>
                                 <td style="vertical-align: middle; text-align: center"><a href="{{ url('/buku-besar?kode_akun=' . $item->akun->kode . '&kriteria=periode&periode=1-bulan-terakhir') }}" data-toggle="tooltip" title="{{ $item->akun->nama }}">{{ $item->akun->kode }}</a></td>
-                                <td style="vertical-align: middle; text-align: right">{{ $item->akun->post_saldo == 1 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>
-                                <td style="vertical-align: middle; text-align: right">{{ $item->akun->post_saldo == 2 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>
+                                <td style="vertical-align: middle; text-align: right">{{ $item->debit_atau_kredit == 1 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>
+                                <td style="vertical-align: middle; text-align: right">{{ $item->debit_atau_kredit == 2 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>
                             </tr>
                         @empty
                             <tr>

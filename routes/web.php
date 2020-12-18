@@ -39,5 +39,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('jurnal-umum', 'JurnalUmumController');
 
     Route::get('buku-besar', 'BukuBesarController@index')->name('buku-besar.index');
+    Route::get('neraca-lajur', 'NeracaLajurController@index')->name('neraca-lajur.index');
 });
 

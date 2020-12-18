@@ -29,12 +29,14 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-hover table-sm table-striped table-bordered">
-                    <thead class="bg-primary text-white">
-                        <th class="text-center">Tanggal</th>
-                        <th class="text-center">Keterangan</th>
-                        <th class="text-center">Akun</th>
-                        <th class="text-center">Debit</th>
-                        <th class="text-center">Kredit</th>
+                    <thead class="bg-success text-white">
+                        <tr>
+                            <th class="text-center"><a href="{{ request('tanggal') == 1 ? url()->full() . '&tanggal=0' : url()->full() . '&tanggal=1' }}">Tanggal {!! request('tanggal') == 1 ? '<i class="fas fa-caret-up"></i>' : '<i class="fas fa-caret-down"></i>' !!}</a></th>
+                            <th class="text-center">Keterangan</th>
+                            <th class="text-center">Akun</th>
+                            <th class="text-center">Debit</th>
+                            <th class="text-center">Kredit</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @php
@@ -47,7 +49,7 @@
                                 <td class="text-center"><a href="{{ url('/buku-besar?kode_akun=' . $item->akun->kode . '&kriteria=periode&periode=1-bulan-terakhir') }}" data-toggle="tooltip" title="{{ $item->akun->nama }}">{{ $item->akun->kode }}</a></td>
                                 <td class="text-right">
                                     @php
-                                        if ($item->akun->post_saldo == 1) {
+                                        if ($item->debit_atau_kredit == 1) {
                                             $debit += $item->nilai;
                                             echo 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3);
                                         } else {
@@ -57,7 +59,7 @@
                                 </td>
                                 <td class="text-right">
                                     @php
-                                        if ($item->akun->post_saldo == 2) {
+                                        if ($item->debit_atau_kredit == 2) {
                                             $kredit += $item->nilai;
                                             echo 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3);
                                         } else {
@@ -72,7 +74,7 @@
                             </tr>
                         @endforelse
                     </tbody>
-                    <tfoot class="bg-primary text-white">
+                    <tfoot class="bg-success text-white">
                         <tr>
                             <th colspan="3" class="text-right">Total</th>
                             <th class="text-right font-weight-bolder">Rp. {{ substr(number_format($debit, 2, ',', '.'),0,-3) }}</th>

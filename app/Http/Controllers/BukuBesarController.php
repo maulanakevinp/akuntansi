@@ -30,11 +30,11 @@ class BukuBesarController extends Controller
                             break;
 
                         case '1-minggu-terakhir':
-                            $jurnal_umum = JurnalUmum::where('akun_id', $akun->id)->whereBetween('tanggal', [date('Y-m-d', strtotime('-7 day')), date('Y-m-d')])->orderBy('tanggal')->paginate(10);
+                            $jurnal_umum = JurnalUmum::where('akun_id', $akun->id)->whereBetween('tanggal', [date('Y-m-d', strtotime('-7 day')), date('Y-m-d')])->orderBy('tanggal', $request->tanggal == 1 ? 'desc' : 'asc')->paginate(10);
                             break;
 
                         case '1-bulan-terakhir':
-                            $jurnal_umum = JurnalUmum::where('akun_id', $akun->id)->whereMonth('tanggal', date('m'))->whereYear('tanggal', date('Y'))->orderBy('tanggal')->paginate(10);
+                            $jurnal_umum = JurnalUmum::where('akun_id', $akun->id)->whereMonth('tanggal', date('m'))->whereYear('tanggal', date('Y'))->orderBy('tanggal', $request->tanggal == 1 ? 'desc' : 'asc')->paginate(10);
                             break;
 
                         default:
@@ -49,14 +49,14 @@ class BukuBesarController extends Controller
                         'tanggal_akhir' => ['required','date'],
                     ]);
 
-                    $jurnal_umum = JurnalUmum::where('akun_id', $akun->id)->whereBetween('tanggal', [$request->tanggal_awal, $request->tanggal_akhir])->orderBy('tanggal')->paginate(10);
+                    $jurnal_umum = JurnalUmum::where('akun_id', $akun->id)->whereBetween('tanggal', [$request->tanggal_awal, $request->tanggal_akhir])->orderBy('tanggal', $request->tanggal == 1 ? 'desc' : 'asc')->paginate(10);
                     break;
 
                 case 'bulan':
                     $request->validate([
                         'bulan' => ['required','date_format:Y-m'],
                     ]);
-                    $jurnal_umum = JurnalUmum::where('akun_id', $akun->id)->whereMonth('tanggal', date('m',strtotime($request->bulan)))->whereYear('tanggal', date('Y',strtotime($request->bulan)))->orderBy('tanggal')->paginate(10);
+                    $jurnal_umum = JurnalUmum::where('akun_id', $akun->id)->whereMonth('tanggal', date('m',strtotime($request->bulan)))->whereYear('tanggal', date('Y',strtotime($request->bulan)))->orderBy('tanggal', $request->tanggal == 1 ? 'desc' : 'asc')->paginate(10);
                     break;
 
                 default:

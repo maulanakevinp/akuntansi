@@ -15,7 +15,7 @@ class JurnalUmumController extends Controller
      */
     public function index(Request $request)
     {
-        $jurnal_umum = JurnalUmum::orderBy('tanggal','desc')->paginate(10);
+        $jurnal_umum = JurnalUmum::orderBy('tanggal', $request->tanggal == 1 ? 'desc' : 'asc')->paginate(10);
 
         if ($request->cari) {
             $jurnal_umum = JurnalUmum::where('keterangan','like',"%{$request->cari}%")
@@ -24,10 +24,10 @@ class JurnalUmumController extends Controller
                                 $jurnal_umum->where('nama','like',"%{$request->cari}%");
                                 $jurnal_umum->orWhere('kode','like',"%{$request->cari}%");
                             })
-                            ->orderBy('tanggal','desc')->paginate(10);
+                            ->orderBy('tanggal', $request->tanggal == 1 ? 'desc' : 'asc')->paginate(10);
         }
 
-        $jurnal_umum->appends($request->only('cari'));
+        $jurnal_umum->appends($request->all());
 
         return view('jurnal-umum.index', compact('jurnal_umum'));
     }
@@ -172,7 +172,7 @@ class JurnalUmumController extends Controller
 
         $from = $request->awal;
         $to = $request->akhir;
-        $jurnal_umum = JurnalUmum::whereBetween('tanggal', [$from, $to])->orderBy('tanggal')->get();
+        $jurnal_umum = JurnalUmum::whereBetween('tanggal', [$from, $to])->orderBy('tanggal', $request->tanggal == 1 ? 'desc' : 'asc')->get();
 
         return view('jurnal-umum.laporan', compact('jurnal_umum'));
     }

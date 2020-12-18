@@ -90,18 +90,33 @@
                 <div class="table-responsive">
                     <table class="table table-hover table-sm table-striped table-bordered mb-3">
                         <thead>
-                            <th class="text-center" width="100px">Tanggal</th>
-                            <th class="text-center">Keterangan</th>
-                            <th class="text-center">Debit</th>
-                            <th class="text-center">Kredit</th>
+                            <tr>
+                                <th rowspan="2" style="vertical-align: middle; text-align: center;" width="100px"><a href="{{ request('tanggal') == 1 ? url()->full() . '&tanggal=0' : url()->full() . '&tanggal=1' }}">Tanggal {!! request('tanggal') == 1 ? '<i class="fas fa-caret-up"></i>' : '<i class="fas fa-caret-down"></i>' !!}</a></th>
+                                <th rowspan="2" style="vertical-align: middle; text-align: center;">Keterangan</th>
+                                <th rowspan="2" style="vertical-align: middle; text-align: center;">Debit</th>
+                                <th rowspan="2" style="vertical-align: middle; text-align: center;">Kredit</th>
+                                <th colspan="2" style="text-align: center;">Saldo</th>
+                            </tr>
+                            <tr>
+                                <th style="vertical-align: middle; text-align: center;">Debit</th>
+                                <th style="vertical-align: middle; text-align: center;">Kredit</th>
+                            </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $nilai = 0;
+                            @endphp
                             @forelse ($jurnal_umum as $item)
+                                @php
+                                    $nilai += $item->nilai;
+                                @endphp
                                 <tr>
-                                    <td style="vertical-align: middle; text-align: center">{{ $item->tanggal }}</td>
-                                    <td style="vertical-align: middle">{{ $item->keterangan }}</td>
-                                    <td style="vertical-align: middle; text-align: right">{{ $item->akun->post_saldo == 1 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>
-                                    <td style="vertical-align: middle; text-align: right">{{ $item->akun->post_saldo == 2 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>
+                                    <td class="text-center">{{ $item->tanggal }}</td>
+                                    <td>{{ $item->keterangan }}</td>
+                                    <td class="text-right">{{ $item->debot_atau_kredit == 1 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>
+                                    <td class="text-right">{{ $item->debot_atau_kredit == 2 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>
+                                    <td class="text-right">{{ $item->akun->post_saldo == 1 ? 'Rp. ' . substr(number_format($nilai, 2, ',', '.'),0,-3) : '-' }}</td>
+                                    <td class="text-right">{{ $item->akun->post_saldo == 2 ? 'Rp. ' . substr(number_format($nilai, 2, ',', '.'),0,-3) : '-' }}</td>
                                 </tr>
                             @empty
                                 <tr>

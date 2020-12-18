@@ -75,6 +75,20 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label class="form-control-label col-md-3" for="debit_atau_kredit">Debit/Kredit</label>
+                    <div class="col-md-9">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="debit_atau_kredit1" name="debit_atau_kredit" class="custom-control-input" value="1" {{ old('debit_atau_kredit', $jurnal_umum->debit_atau_kredit) == 1 ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="debit_atau_kredit1">Debit</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="debit_atau_kredit2" name="debit_atau_kredit" class="custom-control-input" value="2" {{ old('debit_atau_kredit', $jurnal_umum->debit_atau_kredit) == 2 ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="debit_atau_kredit2">Kredit</label>
+                        </div>
+                        <span class="invalid-feedback font-weight-bold d-block"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="form-control-label col-form-label col-md-3" for="nilai">Nilai</label>
                     <div class="col-md-9">
                         <input type="text" class="form-control" name="nilai" placeholder="Masukkan Nilai ..." value="{{ old('nilai', $jurnal_umum->nilai)}}">

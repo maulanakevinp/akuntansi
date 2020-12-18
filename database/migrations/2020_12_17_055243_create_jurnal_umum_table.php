@@ -19,6 +19,7 @@ class CreateJurnalUmumTable extends Migration
             $table->date('tanggal');
             $table->text('keterangan');
             $table->string('bukti', 128)->nullable();
+            $table->boolean('debit_atau_kredit');
             $table->bigInteger('nilai');
             $table->timestamps();
         });

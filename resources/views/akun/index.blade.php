@@ -40,14 +40,16 @@
             <div class="table-responsive">
                 <table class="table table-hover table-sm table-striped table-bordered">
                     <thead>
-                        <th class="text-center" width="20px">
-                            <input type="checkbox" class="akun-checkbox" id="check_all">
-                        </th>
-                        <th class="text-center" width="20px">Opsi</th>
-                        <th class="text-center">Kode</th>
-                        <th class="text-center">Nama</th>
-                        <th class="text-center">Post Saldo</th>
-                        <th class="text-center">Post Laporan</th>
+                        <tr>
+                            <th class="text-center" width="20px">
+                                <input type="checkbox" class="akun-checkbox" id="check_all">
+                            </th>
+                            <th class="text-center" width="20px">Opsi</th>
+                            <th class="text-center">Kode</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">Post Saldo</th>
+                            <th class="text-center">Post Laporan</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @forelse ($akun as $item)

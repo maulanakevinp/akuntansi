@@ -24,11 +24,12 @@ class JurnalUmumRequest extends FormRequest
     public function rules()
     {
         return [
-            'akun_id'       => ['required','numeric'],
-            'tanggal'       => ['required','date'],
-            'keterangan'    => ['required'],
-            'bukti'         => ['nullable','file','max:2048'],
-            'nilai'         => ['required','numeric'],
+            'akun_id'           => ['required','numeric'],
+            'tanggal'           => ['required','date'],
+            'keterangan'        => ['required'],
+            'bukti'             => ['nullable','file','max:2048'],
+            'debit_atau_kredit' => ['required','numeric'],
+            'nilai'             => ['required','numeric'],
         ];
     }
 }
