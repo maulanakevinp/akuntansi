@@ -31,11 +31,11 @@ class BukuBesarController extends Controller
 
                         case '1-minggu-terakhir':
                             $jurnal_umum = JurnalUmum::where('akun_id', $akun->id)->whereBetween('tanggal', [date('Y-m-d', strtotime('-7 day')), date('Y-m-d')])->orderBy('tanggal')->paginate(10);
-                        break;
+                            break;
 
                         case '1-bulan-terakhir':
                             $jurnal_umum = JurnalUmum::where('akun_id', $akun->id)->whereMonth('tanggal', date('m'))->whereYear('tanggal', date('Y'))->orderBy('tanggal')->paginate(10);
-                        break;
+                            break;
 
                         default:
                             return redirect('/buku-besar'.$url);
