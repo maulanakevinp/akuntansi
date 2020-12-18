@@ -12,11 +12,6 @@ class BukuBesarController extends Controller
     {
         $akun = Akun::whereKode($request->kode_akun)->first();
 
-        $request->validate([
-            'kode_akun' => ['required','numeric'],
-            'kriteria'  => ['required'],
-        ]);
-
         $jurnal_umum = null;
         $url = Akun::orderBy('kode')->first() ? '?kode_akun=' . Akun::orderBy('kode')->first()->kode . '&kriteria=periode&periode=hari-ini' : '';
 
