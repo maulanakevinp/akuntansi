@@ -134,22 +134,4 @@ class AkunController extends Controller
             'message'   => 'Akun berhasil dihapus'
         ]);
     }
-
-    public function laporan(Request $request, Akun $akun)
-    {
-        $request->validate([
-            'awal'  => ['required','date'],
-            'akhir' => ['required','date'],
-        ]);
-
-        if (!$request->awal || !$request->akhir) {
-            return redirect()->route('jurnal-umum.index');
-        }
-
-        $from = $request->awal;
-        $to = $request->akhir;
-        $jurnal_umum = JurnalUmum::where('akun_id', $akun->id)->whereBetween('tanggal', [$from, $to])->orderBy('tanggal')->get();
-
-        return view('akun.laporan', compact('akun','jurnal_umum'));
-    }
 }

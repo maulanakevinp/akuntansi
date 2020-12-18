@@ -73,6 +73,11 @@
                         <i class="ni ni-bullet-list-67 text-info"></i> {{ __('Kelola Jurnal Umum') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->segment(1) == 'buku-besar' ? 'active' : '' }}" href="{{ url('/buku-besar') }}{{ App\Models\Akun::orderBy('kode')->first() ? '?kode_akun=' . App\Models\Akun::orderBy('kode')->first()->kode . '&kriteria=periode&periode=1-bulan-terakhir' : '' }}">
+                        <i class="ni ni-bullet-list-67 text-yellow"></i> {{ __('Kelola Buku Besar') }}
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

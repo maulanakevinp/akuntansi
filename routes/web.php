@@ -30,7 +30,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
     Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 
-    Route::get('akun/laporan/{akun}', 'AkunController@laporan')->name('akun.laporan');
     Route::delete('akun/destroys', 'AkunController@destroys')->name('akun.destroys');
     Route::resource('akun', 'AkunController');
 
@@ -38,5 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('jurnal-umum/delete/{jurnal_umum}', 'JurnalUmumController@delete')->name('jurnal-umum.delete');
     Route::delete('jurnal-umum/destroys', 'JurnalUmumController@destroys')->name('jurnal-umum.destroys');
     Route::resource('jurnal-umum', 'JurnalUmumController');
+
+    Route::get('buku-besar', 'BukuBesarController@index')->name('buku-besar.index');
 });
 

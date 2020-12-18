@@ -56,11 +56,11 @@
                                     <input type="checkbox" class="akun-checkbox" id="delete{{ $item->id }}" name="delete[]" value="{{ $item->id }}">
                                 </td>
                                 <td style="vertical-align: middle">
-                                    <a href="{{ route('akun.show', $item) }}" class="btn btn-sm btn-info" data-toggle="tooltip" title="Detail Akun"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ url('/buku-besar?kode_akun=' . $item->kode . '&kriteria=periode&periode=1-bulan-terakhir') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Buku Besar"><i class="fas fa-book"></i></a>
                                     <a href="{{ route('akun.edit', $item) }}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
                                     <a class="btn btn-sm btn-danger hapus-data" data-nama="{{ $item->nama }}" data-action="{{ route("akun.destroy", $item) }}" data-toggle="tooltip" title="Hapus" href="#modal-hapus"><i class="fas fa-trash"></i></a>
                                 </td>
-                                <td style="vertical-align: middle" class="text-center"><a href="{{ route('akun.show', $item) }}">{{ $item->kode }}</a></td>
+                                <td style="vertical-align: middle" class="text-center"><a href="{{ url('/buku-besar?kode_akun=' . $item->kode . '&kriteria=periode&periode=1-bulan-terakhir') }}">{{ $item->kode }}</a></td>
                                 <td style="vertical-align: middle">{{ $item->nama }}</td>
                                 <td style="vertical-align: middle" class="text-center">{{ $item->post_saldo == 1 ? 'Debit' : 'Kredit' }}</td>
                                 <td style="vertical-align: middle" class="text-center">{{ $item->post_laporan == 1 ? 'Neraca' : 'Laba Rugi' }}</td>
