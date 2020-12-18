@@ -33,13 +33,13 @@ $(document).on('submit', 'form', function(event) {
             alertError();
             let focus = true;
             $.each(response.responseJSON.errors, function (i, e) {
-                $('#pesanError').append(`<li>`+e+`</li>`);
-                if (!$("[name='" + i + "']").hasClass('is-invalid')) {
-                    $("[name='" + i + "']").addClass('is-invalid');
-                    let a =$("[name='" + i + "']").parent().parent().find('.invalid-feedback').html(e);
-                    console.log(a);
+                console.log(i);
+                $('#pesanError').append(`<li>${e}</li>`);
+                if (!$(`[name="${i}"]`).hasClass('is-invalid')) {
+                    $(`[name="${i}"]`).addClass('is-invalid');
+                    $(`[name="${i}"]`).parent().parent().find('.invalid-feedback').html(e);
                     if (focus) {
-                        $("[name='" + i + "']").focus();
+                        $(`[name="${i}"]`).focus();
                         focus = false;
                     }
                 }

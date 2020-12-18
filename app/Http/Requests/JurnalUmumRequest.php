@@ -32,4 +32,17 @@ class JurnalUmumRequest extends FormRequest
             'nilai'             => ['required','numeric'],
         ];
     }
+
+    /**
+     * Get the validation message that apply to the request.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'akun_id.required'  => __('akun wajib diisi.'),
+            'akun_id.numeric'   => __('akun harus berupa angka.'),
+        ];
+    }
 }
