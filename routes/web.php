@@ -47,5 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('buku-besar', 'BukuBesarController@index')->name('buku-besar.index');
     Route::get('neraca-lajur', 'NeracaLajurController@index')->name('neraca-lajur.index');
+    Route::get('laporan/posisi-keuangan', 'LaporanController@posisi_keuangan')->name('laporan.posisi-keuangan');
+    Route::get('laporan/laba-rugi', 'LaporanController@laba_rugi')->name('laporan.laba-rugi');
+    Route::get('laporan/perubahan-ekuitas', 'LaporanController@perubahan_ekuitas')->name('laporan.perubahan-ekuitas');
 });
 

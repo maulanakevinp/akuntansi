@@ -88,6 +88,30 @@
                         <i class="ni ni-bullet-list-67 text-warning"></i> {{ __('Neraca Lajur') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->segment(1) == 'laporan' ? 'active' : '' }}" href="#laporan" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="laporan">
+                        <i class="ni ni-bullet-list-67 text-gray"></i> {{ __('Laporan') }}
+                    </a>
+                    <div class="collapse {{ request()->segment(1) == 'laporan' ? 'show' : '' }}" id="laporan">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->segment(2) == 'perubahan-ekuitas' ? 'active' : '' }}" href="{{ route('laporan.perubahan-ekuitas') }}">
+                                    Perubahan Ekuitas
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->segment(2) == 'laba-rugi' ? 'active' : '' }}" href="{{ route('laporan.laba-rugi') }}">
+                                    Laba Rugi
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->segment(2) == 'posisi-keuangan' ? 'active' : '' }}" href="{{ route('laporan.posisi-keuangan') }}">
+                                    Posisi Keuangan
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
