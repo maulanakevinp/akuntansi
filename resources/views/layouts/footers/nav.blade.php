@@ -11,13 +11,13 @@
                 <a href="https://maulanakevinp.github.io" class="nav-link" target="_blank">Maulana Kevin P</a>
             </li>
             <li class="nav-item">
-                <a href="https://www.instagram.com/bagasdika22/" class="nav-link" target="_blank">Bagas Dika M</a>
+                <a href="https://www.instagram.com/bagasdika22/" class="nav-link" target="_blank">Bagas Suryadika M</a>
             </li>
             <li class="nav-item">
                 <a href="https://www.instagram.com/afebri16/" class="nav-link" target="_blank">Arif Febrian</a>
             </li>
             <li class="nav-item">
-                <a href="https://www.instagram.com/nhmcwt/" class="nav-link" target="_blank">Hidayah Monic</a>
+                <a href="https://www.instagram.com/nhmcwt/" class="nav-link" target="_blank">Nur Hidayah M</a>
             </li>
             <li class="nav-item">
                 <a href="https://www.instagram.com/sindiyulitaa/" class="nav-link" target="_blank">Sindy Yulita</a>
