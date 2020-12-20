@@ -90,10 +90,11 @@
                 </div>
                 <div class="form-group row">
                     <label class="form-control-label col-form-label col-md-3" for="nilai">Nilai</label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control" name="nilai" placeholder="Masukkan Nilai ..." value="{{ old('nilai', $jurnal_umum->nilai)}}">
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="nilai" id="nilai" placeholder="Masukkan Nilai ..." value="{{ old('nilai', $jurnal_umum->nilai)}}">
                         <span class="invalid-feedback font-weight-bold"></span>
                     </div>
+                    <div class="col-md-4 col-form-label" id="rupiah">Rp. {{ substr(number_format($jurnal_umum->nilai, 2, ',', '.'),0,-3) }}</div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block" id="simpan">SIMPAN</button>
             </form>
@@ -115,6 +116,10 @@
         $('#akun_id').select2({
             placeholder: "Pilih Akun",
             allowClear: true
+        });
+
+        $("#nilai").on('keyup',function () {
+            $("#rupiah").html('Rp. ' + new Intl.NumberFormat('id-ID').format($(this).val()));
         });
     });
 </script>
