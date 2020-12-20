@@ -26,6 +26,9 @@ Auth::routes([
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
+	Route::get('pengaturan', 'HomeController@pengaturan')->name('pengaturan');
+	Route::post('reset-data', 'HomeController@reset_data')->name('reset-data');
+
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
     Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);

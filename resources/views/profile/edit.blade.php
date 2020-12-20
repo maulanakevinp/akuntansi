@@ -1,5 +1,5 @@
 @extends('layouts.app', ['title' => __('User Profile')])
-
+@section('judul', 'Profil - Sistem Informasi Akuntansi')
 @section('content')
     @include('profile.partials.header', [
         'title' => __('Hello') . ' '. auth()->user()->name,
@@ -15,7 +15,7 @@
                         <div class="col-lg-3 order-lg-2">
                             <div class="card-profile-image">
                                 <a href="#">
-                                    <img src="{{ asset('argon') }}/img/theme/team-4-800x800.jpg" class="rounded-circle">
+                                    <img src="{{ asset('assets') }}/img/unej.png" class="rounded-circle">
                                 </a>
                             </div>
                         </div>
@@ -27,40 +27,19 @@
                         </div>
                     </div>
                     <div class="card-body pt-0 pt-md-4">
-                        <div class="row">
-                            <div class="col">
-                                <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-                                    <div>
-                                        <span class="heading">22</span>
-                                        <span class="description">{{ __('Friends') }}</span>
-                                    </div>
-                                    <div>
-                                        <span class="heading">10</span>
-                                        <span class="description">{{ __('Photos') }}</span>
-                                    </div>
-                                    <div>
-                                        <span class="heading">89</span>
-                                        <span class="description">{{ __('Comments') }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center">
+                        <div class="text-center mt-md-5">
                             <h3>
                                 {{ auth()->user()->name }}<span class="font-weight-light">, 27</span>
                             </h3>
                             <div class="h5 font-weight-300">
-                                <i class="ni location_pin mr-2"></i>{{ __('Bucharest, Romania') }}
+                                <i class="ni location_pin mr-2"></i>{{ __('Kelompok 8') }}
                             </div>
                             <div class="h5 mt-4">
-                                <i class="ni business_briefcase-24 mr-2"></i>{{ __('Solution Manager - Creative Tim Officer') }}
+                                <i class="ni business_briefcase-24 mr-2"></i>{{ __('Fakultas Ilmu Komputer - Sistem Informasi') }}
                             </div>
                             <div>
-                                <i class="ni education_hat mr-2"></i>{{ __('University of Computer Science') }}
+                                <i class="ni education_hat mr-2"></i>{{ __('Universitas Jember') }}
                             </div>
-                            <hr class="my-4" />
-                            <p>{{ __('Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.') }}</p>
-                            <a href="#">{{ __('Show more') }}</a>
                         </div>
                     </div>
                 </div>
