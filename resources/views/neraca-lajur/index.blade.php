@@ -261,15 +261,15 @@
     $(document).ready(function () {
         $("#jumlah_neraca_saldo_debit").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('neraca_saldo_debit')));
         $("#jumlah_neraca_saldo_kredit").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('neraca_saldo_kredit')));
-        $("#selisih_neraca_saldo").html('Rp. ' + new Intl.NumberFormat('id-ID').format(angka($("#jumlah_neraca_saldo_kredit").html()) - angka($("#jumlah_neraca_saldo_debit").html())));
+        $("#selisih_neraca_saldo").html('Rp. ' + new Intl.NumberFormat('id-ID').format(Math.abs(angka($("#jumlah_neraca_saldo_kredit").html()) - angka($("#jumlah_neraca_saldo_debit").html()))));
 
         $("#jumlah_penyesuaian_debit").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('penyesuaian_debit')));
         $("#jumlah_penyesuaian_kredit").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('penyesuaian_kredit')));
-        $("#selisih_penyesuaian").html('Rp. ' + new Intl.NumberFormat('id-ID').format(angka($("#jumlah_penyesuaian_kredit").html()) - angka($("#jumlah_penyesuaian_debit").html())));
+        $("#selisih_penyesuaian").html('Rp. ' + new Intl.NumberFormat('id-ID').format(Math.abs(angka($("#jumlah_penyesuaian_kredit").html()) - angka($("#jumlah_penyesuaian_debit").html()))));
 
         $("#jumlah_disesuaikan_debit").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('disesuaikan_debit')));
         $("#jumlah_disesuaikan_kredit").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('disesuaikan_kredit')));
-        $("#selisih_disesuaikan").html('Rp. ' + new Intl.NumberFormat('id-ID').format(angka($("#jumlah_disesuaikan_kredit").html()) - angka($("#jumlah_disesuaikan_debit").html())));
+        $("#selisih_disesuaikan").html('Rp. ' + new Intl.NumberFormat('id-ID').format(Math.abs(angka($("#jumlah_disesuaikan_kredit").html()) - angka($("#jumlah_disesuaikan_debit").html()))));
 
         $("#jumlah_laba_rugi_debit").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('laba_rugi_debit')));
         $("#jumlah_laba_rugi_kredit").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('laba_rugi_kredit')));
@@ -277,7 +277,7 @@
 
         $("#jumlah_neraca_debit").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('neraca_debit')));
         $("#jumlah_neraca_kredit").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('neraca_kredit')));
-        $("#selisih_neraca").html('Rp. ' + new Intl.NumberFormat('id-ID').format(angka($("#jumlah_neraca_debit").html()) - angka($("#jumlah_neraca_kredit").html())));
+        $("#selisih_neraca").html('Rp. ' + new Intl.NumberFormat('id-ID').format(Math.abs(angka($("#jumlah_neraca_kredit").html()) - angka($("#jumlah_neraca_debit").html()))));
         kriteria();
 
         $("#kriteria").change(function () {
