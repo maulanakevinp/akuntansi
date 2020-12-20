@@ -424,8 +424,6 @@
     $(document).ready(function () {
         $("#iktisar_laba_rugi_pendapatan").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('pendapatan')));
         $("#iktisar_laba_rugi_beban").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('beban')));
-        $("#total_kiri").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('kiri')));
-        $("#total_kanan").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('kanan')));
 
         let laba_rugi = angka($("#iktisar_laba_rugi_pendapatan").html()) - angka($("#iktisar_laba_rugi_beban").html());
         if (laba_rugi > 0) {
@@ -439,6 +437,9 @@
             $("#judul_laba_rugi_modal").html(`&nbsp; &nbsp; &nbsp; &nbsp; Iktisar Laba-Rugi`);
             $("#laba_rugi_modal_kanan").html('Rp. ' + new Intl.NumberFormat('id-ID').format(laba_rugi));
         }
+
+        $("#total_kiri").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('kiri')));
+        $("#total_kanan").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('kanan')));
 
         kriteria();
         $("#kriteria").change(function () {
