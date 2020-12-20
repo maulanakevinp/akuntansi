@@ -20,7 +20,7 @@
                 <a href="https://www.instagram.com/nhmcwt/" class="nav-link" target="_blank">Nur Hidayah M</a>
             </li>
             <li class="nav-item">
-                <a href="https://www.instagram.com/sindiyulitaa/" class="nav-link" target="_blank">Sindy Yulita</a>
+                <a href="https://www.instagram.com/sindiyulitaa/" class="nav-link" target="_blank">Sindi Yulita A</a>
             </li>
         </ul>
     </div>
