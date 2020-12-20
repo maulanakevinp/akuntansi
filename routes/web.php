@@ -48,6 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('jurnal-penyesuaian/destroys', 'JurnalPenyesuaianController@destroys')->name('jurnal-penyesuaian.destroys');
     Route::resource('jurnal-penyesuaian', 'JurnalPenyesuaianController');
 
+    Route::get('jurnal-penutup', 'JurnalPenutupController@index')->name('jurnal-penutup.index');
     Route::get('buku-besar', 'BukuBesarController@index')->name('buku-besar.index');
     Route::get('neraca-lajur', 'NeracaLajurController@index')->name('neraca-lajur.index');
     Route::get('laporan/posisi-keuangan', 'LaporanController@posisi_keuangan')->name('laporan.posisi-keuangan');

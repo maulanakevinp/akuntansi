@@ -107,6 +107,11 @@
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->segment(1) == 'jurnal-penutup' ? 'active' : '' }}" href="{{ route('jurnal-penutup.index') }}">
+                        <i class="ni ni-bullet-list-67 text-green"></i> {{ __('Jurnal Penutup') }}
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
