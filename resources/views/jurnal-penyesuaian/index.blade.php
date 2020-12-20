@@ -39,7 +39,7 @@
     <div class="card shadow">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover table-sm table-striped table-bordered">
+                <table class="mb-3 table table-hover table-sm table-striped table-bordered">
                     <thead>
                         <tr>
                             <th class="text-center" width="20px">

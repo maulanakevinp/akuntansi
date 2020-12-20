@@ -109,7 +109,11 @@
                                             case '1-bulan-terakhir':
                                                 foreach ($item->jurnal_umum as $jurnal_umum) {
                                                     if (date('Y-m',strtotime($jurnal_umum->tanggal)) == date('Y-m')) {
-                                                        $saldo += $jurnal_umum->nilai;
+                                                        if ($jurnal_umum->debit_atau_kredit == $jurnal_umum->akun->post_saldo) {
+                                                            $saldo += $jurnal_umum->nilai;
+                                                        } else {
+                                                            $saldo -= $jurnal_umum->nilai;
+                                                        }
                                                     }
                                                 }
 
@@ -123,7 +127,11 @@
 
                                             case '1-minggu-terakhir':
                                                 foreach ($item->jurnal_umum->whereBetween('tanggal', [date('Y-m-d', strtotime('-7 day')), date('Y-m-d')]) as $jurnal_umum) {
-                                                    $saldo += $jurnal_umum->nilai;
+                                                    if ($jurnal_umum->debit_atau_kredit == $jurnal_umum->akun->post_saldo) {
+                                                        $saldo += $jurnal_umum->nilai;
+                                                    } else {
+                                                        $saldo -= $jurnal_umum->nilai;
+                                                    }
                                                 }
 
                                                 foreach ($item->jurnal_penyesuaian->whereBetween('tanggal', [date('Y-m-d', strtotime('-7 day')), date('Y-m-d')]) as $jurnal_penyesuaian) {
@@ -136,7 +144,11 @@
 
                                     case 'rentang-waktu':
                                         foreach ($item->jurnal_umum->whereBetween('tanggal', [request('tanggal_awal'), request('tanggal_akhir')]) as $jurnal_umum) {
-                                            $saldo += $jurnal_umum->nilai;
+                                            if ($jurnal_umum->debit_atau_kredit == $jurnal_umum->akun->post_saldo) {
+                                                $saldo += $jurnal_umum->nilai;
+                                            } else {
+                                                $saldo -= $jurnal_umum->nilai;
+                                            }
                                         }
 
                                         foreach ($item->jurnal_penyesuaian->whereBetween('tanggal', [request('tanggal_awal'), request('tanggal_akhir')]) as $jurnal_penyesuaian) {
@@ -148,7 +160,11 @@
                                     case 'bulan':
                                         foreach ($item->jurnal_umum as $jurnal_umum) {
                                             if (date('Y-m',strtotime($jurnal_umum->tanggal)) == date('Y-m', strtotime(request('bulan')))) {
-                                                $saldo += $jurnal_umum->nilai;
+                                                if ($jurnal_umum->debit_atau_kredit == $jurnal_umum->akun->post_saldo) {
+                                                    $saldo += $jurnal_umum->nilai;
+                                                } else {
+                                                    $saldo -= $jurnal_umum->nilai;
+                                                }
                                             }
                                         }
 
@@ -162,7 +178,11 @@
 
                                     default:
                                         foreach ($item->jurnal_umum as $jurnal_umum) {
-                                            $saldo += $jurnal_umum->nilai;
+                                            if ($jurnal_umum->debit_atau_kredit == $jurnal_umum->akun->post_saldo) {
+                                                $saldo += $jurnal_umum->nilai;
+                                            } else {
+                                                $saldo -= $jurnal_umum->nilai;
+                                            }
                                         }
 
                                         foreach ($item->jurnal_penyesuaian as $jurnal_penyesuaian) {
@@ -172,7 +192,11 @@
                                         break;
                                 }
 
-                                $disesuaikan = $saldo + $penyesuaian;
+                                if ($item->post_saldo == $item->post_penyesuaian) {
+                                    $disesuaikan = $saldo + $penyesuaian;
+                                } else {
+                                    $disesuaikan = $saldo - $penyesuaian;
+                                }
                             @endphp
                             <tr>
                                 <td style="vertical-align: middle; text-align: center"><a href="{{ url('/buku-besar?kode_akun=' . $item->kode . '&kriteria=periode&periode=1-bulan-terakhir') }}">{{ $item->kode }}</a></td>
@@ -253,7 +277,7 @@
 
         $("#jumlah_neraca_debit").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('neraca_debit')));
         $("#jumlah_neraca_kredit").html('Rp. ' + new Intl.NumberFormat('id-ID').format(jumlah('neraca_kredit')));
-        $("#selisih_neraca").html('Rp. ' + new Intl.NumberFormat('id-ID').format(angka($("#jumlah_neraca_kredit").html()) - angka($("#jumlah_neraca_debit").html())));
+        $("#selisih_neraca").html('Rp. ' + new Intl.NumberFormat('id-ID').format(angka($("#jumlah_neraca_debit").html()) - angka($("#jumlah_neraca_kredit").html())));
         kriteria();
 
         $("#kriteria").change(function () {
