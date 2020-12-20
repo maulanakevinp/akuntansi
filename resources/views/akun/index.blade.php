@@ -48,6 +48,7 @@
                             <th class="text-center">Kode</th>
                             <th class="text-center">Nama</th>
                             <th class="text-center">Post Saldo</th>
+                            <th class="text-center">Post Penyesuaian</th>
                             <th class="text-center">Post Laporan</th>
                         </tr>
                     </thead>
@@ -65,6 +66,7 @@
                                 <td style="vertical-align: middle" class="text-center"><a href="{{ url('/buku-besar?kode_akun=' . $item->kode . '&kriteria=periode&periode=1-bulan-terakhir') }}">{{ $item->kode }}</a></td>
                                 <td style="vertical-align: middle">{{ $item->nama }}</td>
                                 <td style="vertical-align: middle" class="text-center">{{ $item->post_saldo == 1 ? 'Debit' : 'Kredit' }}</td>
+                                <td style="vertical-align: middle" class="text-center">{{ $item->post_penyesuaian == 1 ? 'Debit' : 'Kredit' }}</td>
                                 <td style="vertical-align: middle" class="text-center">{{ $item->post_laporan == 1 ? 'Neraca' : 'Laba Rugi' }}</td>
                             </tr>
                         @empty

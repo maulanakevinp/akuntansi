@@ -68,6 +68,20 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label class="form-control-label col-form-label col-md-3" for="post_penyesuaian">Post Penyesuaian</label>
+                    <div class="col-md-9">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="post_penyesuaian1" name="post_penyesuaian" class="custom-control-input" value="1" {{ old('post_penyesuaian') == 1 ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="post_penyesuaian1">Debit</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="post_penyesuaian2" name="post_penyesuaian" class="custom-control-input" value="2" {{ old('post_penyesuaian') == 2 ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="post_penyesuaian2">Kredit</label>
+                        </div>
+                        <span class="invalid-feedback font-weight-bold d-block"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="form-control-label col-form-label col-md-3" for="post_laporan">Post Laporan</label>
                     <div class="col-md-9">
                         <div class="custom-control custom-radio custom-control-inline">

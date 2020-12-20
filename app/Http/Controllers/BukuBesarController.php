@@ -13,7 +13,7 @@ class BukuBesarController extends Controller
         $akun = Akun::whereKode($request->kode_akun)->first();
 
         $jurnal_umum = null;
-        $url = Akun::orderBy('kode')->first() ? '?kode_akun=' . Akun::orderBy('kode')->first()->kode . '&kriteria=periode&periode=hari-ini' : '';
+        $url = Akun::orderBy('kode')->first() ? '?kode_akun=' . Akun::orderBy('kode')->first()->kode . '&kriteria=periode&periode=1-bulan-terakhir' : '';
 
         if ($akun) {
             $jurnal_umum = JurnalUmum::where('akun_id', $akun->id)->paginate(10);

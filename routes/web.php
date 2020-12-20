@@ -38,6 +38,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('jurnal-umum/destroys', 'JurnalUmumController@destroys')->name('jurnal-umum.destroys');
     Route::resource('jurnal-umum', 'JurnalUmumController');
 
+    Route::get('jurnal-penyesuaian/laporan', 'JurnalPenyesuaianController@laporan')->name('jurnal-penyesuaian.laporan');
+    Route::delete('jurnal-penyesuaian/delete/{jurnal_penyesuaian}', 'JurnalPenyesuaianController@delete')->name('jurnal-penyesuaian.delete');
+    Route::delete('jurnal-penyesuaian/destroys', 'JurnalPenyesuaianController@destroys')->name('jurnal-penyesuaian.destroys');
+    Route::resource('jurnal-penyesuaian', 'JurnalPenyesuaianController');
+
     Route::get('buku-besar', 'BukuBesarController@index')->name('buku-besar.index');
     Route::get('neraca-lajur', 'NeracaLajurController@index')->name('neraca-lajur.index');
 });

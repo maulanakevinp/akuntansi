@@ -65,17 +65,22 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->segment(1) == 'akun' ? 'active' : '' }}" href="{{ route('akun.index') }}">
-                        <i class="ni ni-bullet-list-67 text-success"></i> {{ __('Kelola Akun') }}
+                        <i class="ni ni-bullet-list-67 text-success"></i> {{ __('Akun') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->segment(1) == 'jurnal-umum' ? 'active' : '' }}" href="{{ route('jurnal-umum.index') }}">
-                        <i class="ni ni-bullet-list-67 text-info"></i> {{ __('Kelola Jurnal Umum') }}
+                        <i class="ni ni-bullet-list-67 text-info"></i> {{ __('Jurnal Umum') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->segment(1) == 'jurnal-penyesuaian' ? 'active' : '' }}" href="{{ route('jurnal-penyesuaian.index') }}">
+                        <i class="ni ni-bullet-list-67 text-indigo"></i> {{ __('Jurnal Penyesuaian') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->segment(1) == 'buku-besar' ? 'active' : '' }}" href="{{ url('/buku-besar') }}{{ App\Models\Akun::orderBy('kode')->first() ? '?kode_akun=' . App\Models\Akun::orderBy('kode')->first()->kode . '&kriteria=periode&periode=1-bulan-terakhir' : '' }}">
-                        <i class="ni ni-bullet-list-67 text-yellow"></i> {{ __('Kelola Buku Besar') }}
+                        <i class="ni ni-bullet-list-67 text-yellow"></i> {{ __('Buku Besar') }}
                     </a>
                 </li>
                 <li class="nav-item">

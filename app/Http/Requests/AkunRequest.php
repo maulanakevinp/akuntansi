@@ -28,6 +28,7 @@ class AkunRequest extends FormRequest
             'kode'              => ['required','digits:4','unique:akun,kode'],
             'nama'              => ['required','string','max:128'],
             'post_saldo'        => ['required','numeric'],
+            'post_penyesuaian'  => ['required','numeric'],
             'post_laporan'      => ['required','numeric'],
         ];
 

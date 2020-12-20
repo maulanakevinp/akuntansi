@@ -13,4 +13,9 @@ class Akun extends Model
     {
         return $this->hasMany(JurnalUmum::class);
     }
+
+    public function jurnal_penyesuaian()
+    {
+        return $this->hasMany(JurnalPenyesuaian::class);
+    }
 }
