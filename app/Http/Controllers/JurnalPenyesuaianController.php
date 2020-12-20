@@ -136,7 +136,16 @@ class JurnalPenyesuaianController extends Controller
      */
     public function destroys(Request $request)
     {
-        JurnalPenyesuaian::whereIn('id', $request->id)->delete();
+        foreach ($request->id as $item) {
+            $jurnal_penyesuaian = JurnalPenyesuaian::find($item);
+
+            if ($jurnal_penyesuaian->bukti) {
+                unlink(storage_path('app/' . $jurnal_penyesuaian->bukti));
+            }
+
+            $jurnal_penyesuaian->delete();
+        }
+
         return response()->json([
             'message'   => 'Jurnal penyesuaian berhasil dihapus'
         ]);

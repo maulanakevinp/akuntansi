@@ -19,7 +19,9 @@ class CreateAkunTable extends Migration
             $table->string('kode', 4)->unique();
             $table->string('nama', 128);
             $table->boolean('post_saldo');
+            $table->boolean('post_penyesuaian');
             $table->boolean('post_laporan');
+            $table->boolean('kelompok_laporan_posisi_keuangan')->nullable();
             $table->timestamps();
         });
     }

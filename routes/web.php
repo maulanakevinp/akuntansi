@@ -30,6 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
     Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 
+    Route::get('akun/export', 'AkunController@export')->name('akun.export');
+    Route::post('akun/import', 'AkunController@import')->name('akun.import');
     Route::delete('akun/destroys', 'AkunController@destroys')->name('akun.destroys');
     Route::resource('akun', 'AkunController');
 

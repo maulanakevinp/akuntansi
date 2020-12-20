@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AkunExport;
 use App\Http\Requests\AkunRequest;
+use App\Imports\AkunImport;
 use App\Models\Akun;
 use App\Models\JurnalUmum;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AkunController extends Controller
 {
@@ -16,30 +19,28 @@ class AkunController extends Controller
      */
     public function index(Request $request)
     {
-        $akun = Akun::orderBy('kode')->paginate(10);
+        $akun = Akun::orderBy('kode')->get();
 
         if ($request->cari) {
             $akun = Akun::where('nama','like',"%{$request->cari}%")
                             ->orWhere('kode','like',"%{$request->cari}%")
-                            ->orderBy('kode')->paginate(10);
+                            ->orderBy('kode')->get();
             if ($request->cari == 'debit') {
-                $akun = Akun::where('post_saldo', 1)->orderBy('kode')->paginate(10);
+                $akun = Akun::where('post_saldo', 1)->orderBy('kode')->get();
             }
 
             if ($request->cari == 'kredit') {
-                $akun = Akun::where('post_saldo', 2)->orderBy('kode')->paginate(10);
+                $akun = Akun::where('post_saldo', 2)->orderBy('kode')->get();
             }
 
             if ($request->cari == 'neraca') {
-                $akun = Akun::where('post_laporan', 1)->orderBy('kode')->paginate(10);
+                $akun = Akun::where('post_laporan', 1)->orderBy('kode')->get();
             }
 
             if ($request->cari == 'laba rugi') {
-                $akun = Akun::where('post_laporan', 2)->orderBy('kode')->paginate(10);
+                $akun = Akun::where('post_laporan', 2)->orderBy('kode')->get();
             }
         }
-
-        $akun->appends($request->only('cari'));
 
         return view('akun.index', compact('akun'));
     }
@@ -133,5 +134,22 @@ class AkunController extends Controller
         return response()->json([
             'message'   => 'Akun berhasil dihapus'
         ]);
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'xlsx' => ['required','file','max:2048']
+        ],[
+            'xlsx.required' => 'File wajib diisi'
+        ]);
+
+        Excel::import(new AkunImport, $request->file('xlsx'));
+        return back();
+    }
+
+    public function export()
+    {
+        return Excel::download(new AkunExport, 'Akun.xlsx');
     }
 }

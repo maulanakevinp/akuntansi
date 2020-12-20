@@ -36,7 +36,7 @@
                     <label class="form-control-label col-md-3" for="akun_id">Akun</label>
                     <div class="col-md-9">
                         <select class="form-control" name="akun_id" id="akun_id">
-                            @foreach (App\Models\Akun::all() as $item)
+                            @foreach (App\Models\Akun::orderBy('kode')->get() as $item)
                                 <option value="{{ $item->id }}" {{ old('akun_id') == $item->id ? 'selected' : '' }}>{{ $item->kode }} - {{ $item->nama }}</option>
                             @endforeach
                         </select>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="form-control-label col-form-label col-md-3" for="tanggal">Tanggal</label>
-                    <div class="col-md-9">
+                    <div class="col-md-3">
                         <input type="date" class="form-control" name="tanggal" placeholder="Masukkan Tanggal ..." value="{{ old('tanggal')}}">
                         <span class="invalid-feedback font-weight-bold"></span>
                     </div>

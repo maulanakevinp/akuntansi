@@ -136,7 +136,16 @@ class JurnalUmumController extends Controller
      */
     public function destroys(Request $request)
     {
-        JurnalUmum::whereIn('id', $request->id)->delete();
+        foreach ($request->id as $item) {
+            $jurnal_umum = JurnalUmum::find($item);
+
+            if ($jurnal_umum->bukti) {
+                unlink(storage_path('app/' . $jurnal_umum->bukti));
+            }
+
+            $jurnal_umum->delete();
+        }
+
         return response()->json([
             'message'   => 'Jurnal umum berhasil dihapus'
         ]);

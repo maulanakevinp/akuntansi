@@ -25,6 +25,8 @@
                                 <button type="button" data-toggle="tooltip" title="Hapus data terpilih" class="btn btn-danger" id="delete" name="delete" >
                                     <i class="fas fa-trash"></i>
                                 </button>
+                                <a id="btn-import" href="#import" data-toggle="tooltip" class="mb-1 btn btn-info" title="Import"><i class="fas fa-file-import"></i></a>
+                                <a href="{{ route('akun.export') }}" data-toggle="tooltip" class="mb-1 btn btn-primary" title="Export"><i class="fas fa-file-export"></i></a>
                                 <a href="{{ route('akun.create') }}" class="btn btn-success" title="Tambah" data-toggle="tooltip"><i class="fas fa-plus"></i></a>
                             </div>
                         </div>
@@ -38,11 +40,11 @@
     <div class="card shadow">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover table-sm table-striped table-bordered">
+                <table class="mb-3 table table-hover table-sm table-striped table-bordered">
                     <thead>
                         <tr>
                             <th class="text-center" width="20px">
-                                <input type="checkbox" class="akun-checkbox" id="check_all">
+                                <input type="checkbox" id="check_all">
                             </th>
                             <th class="text-center" width="20px">Opsi</th>
                             <th class="text-center">Kode</th>
@@ -76,7 +78,6 @@
                         @endforelse
                     </tbody>
                 </table>
-                {{ $akun->links('layouts.footers.pagination') }}
             </div>
         </div>
     </div>
@@ -111,7 +112,29 @@
                 </form>
                 <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Tidak</button>
             </div>
+        </div>
+    </div>
+</div>
 
+<div class="modal fade" id="import" tabindex="-1" role="dialog" aria-labelledby="import" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-import">Import .xlsx</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route("akun.import") }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input accept=".xlsx" type="file" name="xlsx" class="form-control" placeholder="Masukkan File Excel">
+                    <div class="mt-5 d-flex justify-content-between">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -120,6 +143,11 @@
 @push('js')
 <script>
     $(document).ready(function () {
+        $('#btn-import').click(function (e) {
+            e.preventDefault();
+            $("#import").modal('show');
+        });
+
         $(document).on('click', '#delete', function(){
             let id = [];
             if (confirm("Apakah anda yakin ingin menghapus data ini?")) {

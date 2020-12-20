@@ -43,7 +43,7 @@
                     <thead>
                         <tr>
                             <th class="text-center" width="20px">
-                                <input type="checkbox" class="jurnal-penyesuaian-checkbox" id="check_all">
+                                <input type="checkbox" id="check_all">
                             </th>
                             <th class="text-center" width="20px">Opsi</th>
                             <th class="text-center"><a href="{{ request('tanggal') == 1 ? URL::current() . '?tanggal=0' : URL::current() . '?tanggal=1' }}">Tanggal {!! request('tanggal') == 1 ? '<i class="fas fa-caret-up"></i>' : '<i class="fas fa-caret-down"></i>' !!}</a></th>
