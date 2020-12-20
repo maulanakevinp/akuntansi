@@ -26,6 +26,9 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request)
     {
+        if (auth()->user()->id == 1) {
+            return back()->withError(__('Profil gagal diperbarui dikarenakan perubahan dinonaktifkan.'));
+        }
         auth()->user()->update($request->all());
         return back()->withSuccess(__('Profil berhasil diperbarui.'));
     }
@@ -38,6 +41,9 @@ class ProfileController extends Controller
      */
     public function password(PasswordRequest $request)
     {
+        if (auth()->user()->id == 1) {
+            return back()->withError(__('Profil gagal diperbarui dikarenakan perubahan dinonaktifkan.'));
+        }
         auth()->user()->update(['password' => Hash::make($request->get('password'))]);
         return back()->withSuccess(__('Password berhasil diperbarui.'));
     }
