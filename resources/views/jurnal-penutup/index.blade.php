@@ -297,7 +297,7 @@
                             <td class="text-right kanan" id="laba_rugi_modal_kanan">-</td>
                         </tr>
                         @php
-                            $saldo= 0; $penyesuaian = 0;
+                            $saldo= 0; $penyesuaian = 0; $disesuaikan = 0;
                             switch (request('kriteria')) {
                                 case 'periode':
                                     switch (request('periode')) {
@@ -386,11 +386,13 @@
 
                                     break;
                             }
-
-                            if ($item->post_saldo == $item->post_penyesuaian) {
-                                $disesuaikan = $saldo + $penyesuaian;
-                            } else {
-                                $disesuaikan = $saldo - $penyesuaian;
+                            $prive = App\Models\Akun::where('nama','prive')->first();
+                            if ($prive) {
+                                if ($prive->post_saldo == $prive->post_penyesuaian) {
+                                    $disesuaikan = $saldo + $penyesuaian;
+                                } else {
+                                    $disesuaikan = $saldo - $penyesuaian;
+                                }
                             }
                         @endphp
                         <tr>

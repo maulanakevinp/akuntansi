@@ -175,7 +175,7 @@
                         @endforeach
                         <tr>
                             @php
-                                $saldo = 0; $penyesuaian = 0;
+                                $saldo = 0; $penyesuaian = 0; $pendapatan = 0; $pembiayaan = 0;
                                 foreach($akun->where('kelompok_akun_id', 4) as $item) {
                                     switch (request('kriteria')) {
                                         case 'periode':
