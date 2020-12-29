@@ -116,8 +116,7 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="laporan" tabindex="-1" role="dialog" aria-labelledby="laporan" aria-hidden="true">
+<div class="modal fade" id="laporanModal" tabindex="-1" role="dialog" aria-labelledby="laporanModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -152,7 +151,7 @@
     $(document).ready(function () {
         $('#btn-laporan').click(function (e) {
             e.preventDefault();
-            $("#laporan").modal('show');
+            $("#laporanModal").modal('show');
         });
 
         $(document).on('click', '#delete', function(){
