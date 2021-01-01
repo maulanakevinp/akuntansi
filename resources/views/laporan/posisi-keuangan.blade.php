@@ -458,6 +458,12 @@
                                     <th class="text-right" id="jumlah_utang_lancar_kredit"></th>
                                     <th class="text-right" id="jumlah_utang_lancar"></th>
                                 </tr>
+                                <tr>
+                                    <th colspan="2">Utang Tetap</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
                                 @foreach ($akun->where('kelompok_laporan_posisi_keuangan',3) as $item)
                                     @php
                                         $saldo = 0; $penyesuaian = 0;
