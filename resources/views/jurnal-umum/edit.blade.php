@@ -18,7 +18,7 @@
                                 <p class="mb-0 text-sm">Kelola Jurnal Umum</p>
                             </div>
                             <div class="mb-3">
-                                <a href="{{ route("jurnal-umum.index") }}" class="btn btn-success" data-toggle="tooltip" title="Kembali"><i class="fas fa-arrow-left"></i></a>
+                                <a href="{{ route("jurnal-umum.index") }}?page={{ request('page') }}" class="btn btn-success" data-toggle="tooltip" title="Kembali"><i class="fas fa-arrow-left"></i></a>
                             </div>
                         </div>
                     </div>

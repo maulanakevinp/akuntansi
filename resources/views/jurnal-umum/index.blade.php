@@ -26,7 +26,7 @@
                                 <button type="button" data-toggle="tooltip" title="Hapus data terpilih" class="btn btn-danger" id="delete" name="delete" >
                                     <i class="fas fa-trash"></i>
                                 </button>
-                                <a href="{{ route('jurnal-umum.create') }}" class="btn btn-success" title="Tambah" data-toggle="tooltip"><i class="fas fa-plus"></i></a>
+                                <a href="{{ route('jurnal-umum.create') }}?page={{ request('page') }}" class="btn btn-success" title="Tambah" data-toggle="tooltip"><i class="fas fa-plus"></i></a>
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                                     <input type="checkbox" class="jurnal-umum-checkbox" id="delete{{ $item->id }}" name="delete[]" value="{{ $item->id }}">
                                 </td>
                                 <td style="vertical-align: middle">
-                                    <a href="{{ route('jurnal-umum.edit', $item) }}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <a href="{{ route('jurnal-umum.edit', $item) }}?page={{ request('page') }}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
                                     <a class="btn btn-sm btn-danger hapus-data" data-nama="{{ $item->keterangan }}" data-action="{{ route("jurnal-umum.destroy", $item) }}" data-toggle="tooltip" title="Hapus" href="#modal-hapus"><i class="fas fa-trash"></i></a>
                                     @if($item->bukti)<a href="{{ route('jurnal-umum.show', $item) }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Download Bukti"><i class="fas fa-download"></i></a>@endif
                                 </td>
