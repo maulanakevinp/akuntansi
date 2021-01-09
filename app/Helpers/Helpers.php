@@ -112,13 +112,16 @@ if (! function_exists('neraca')) {
 
 if (! function_exists('neraca_akun')) {
     function neraca_akun($kriteria, $periode, $tanggal_awal, $tanggal_akhir, $bulan, $akun) {
-        $saldo= 0; $penyesuaian = 0;
+        $saldo= 0; $penyesuaian = 0; $disesuaikan = 0; $data = null;
         foreach($akun as $item) {
             $data = neraca($kriteria, $periode, $tanggal_awal, $tanggal_akhir, $bulan, $item, $saldo, $penyesuaian);
             $saldo = $data['saldo'];
             $penyesuaian = $data['penyesuaian'];
         }
-        return $data['disesuaikan'];
+        if ($data) {
+            $disesuaikan = $data['disesuaikan'];
+        }
+        return $disesuaikan;
     }
 }
 
