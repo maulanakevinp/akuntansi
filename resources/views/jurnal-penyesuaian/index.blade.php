@@ -64,7 +64,7 @@
                                     <a class="btn btn-sm btn-danger hapus-data" data-nama="{{ $item->keterangan }}" data-action="{{ route("jurnal-penyesuaian.destroy", $item) }}" data-toggle="tooltip" title="Hapus" href="#modal-hapus"><i class="fas fa-trash"></i></a>
                                     @if($item->bukti)<a href="{{ route('jurnal-penyesuaian.show', $item) }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Download Bukti"><i class="fas fa-download"></i></a>@endif
                                 </td>
-                                <td style="vertical-align: middle; text-align: center">{{ $item->tanggal }}</td>
+                                <td style="vertical-align: middle; text-align: center">{{ tgl($item->tanggal) }}</td>
                                 <td style="vertical-align: middle">{{ $item->keterangan }}</td>
                                 <td style="vertical-align: middle; text-align: center"><a href="{{ url('/buku-besar?kode_akun=' . $item->akun->kode . '&kriteria=periode&periode=1-bulan-terakhir') }}" data-toggle="tooltip" title="{{ $item->akun->nama }}">{{ $item->akun->kode }}</a></td>
                                 <td style="vertical-align: middle; text-align: right">{{ $item->debit_atau_kredit == 1 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>

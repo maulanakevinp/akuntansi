@@ -115,7 +115,7 @@
                                     }
                                 @endphp
                                 <tr>
-                                    <td class="text-center">{{ $item->tanggal }}</td>
+                                    <td class="text-center">{{ tgl($item->tanggal) }}</td>
                                     <td>{{ $item->keterangan }}</td>
                                     <td class="text-right">{{ $item->debit_atau_kredit == 1 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>
                                     <td class="text-right">{{ $item->debit_atau_kredit == 2 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>

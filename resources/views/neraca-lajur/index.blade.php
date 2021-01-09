@@ -1,15 +1,6 @@
 @extends('layouts.app')
 @section('judul','Neraca Lajur - Sistem Informasi Akuntansi')
 
-@section('css')
-<style>
-    .card .table td, .card .table th {
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-</style>
-@endsection
-
 @section('content')
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
     <div class="container-fluid">
@@ -74,181 +65,259 @@
 <div class="container-fluid mt--7">
     <div class="card shadow">
         <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-hover table-sm table-striped table-bordered">
-                    <thead class="bg-primary text-white">
-                        <tr>
-                            <th rowspan="2" style="vertical-align: middle; text-align: center">Kode</th>
-                            <th rowspan="2" style="vertical-align: middle; text-align: center">Nama</th>
-                            <th colspan="2" style="vertical-align: middle; text-align: center">Neraca Saldo</th>
-                            <th colspan="2" style="vertical-align: middle; text-align: center">Penyesuaian</th>
-                            <th colspan="2" style="vertical-align: middle; text-align: center">Neraca Saldo Disesuaikan</th>
-                            <th colspan="2" style="vertical-align: middle; text-align: center">Laporan Laba Rugi</th>
-                            <th colspan="2" style="vertical-align: middle; text-align: center">Neraca</th>
-                        </tr>
-                        <tr>
-                            <th style="vertical-align: middle; text-align: center">Debit</th>
-                            <th style="vertical-align: middle; text-align: center">Kredit</th>
-                            <th style="vertical-align: middle; text-align: center">Debit</th>
-                            <th style="vertical-align: middle; text-align: center">Kredit</th>
-                            <th style="vertical-align: middle; text-align: center">Debit</th>
-                            <th style="vertical-align: middle; text-align: center">Kredit</th>
-                            <th style="vertical-align: middle; text-align: center">Debit</th>
-                            <th style="vertical-align: middle; text-align: center">Kredit</th>
-                            <th style="vertical-align: middle; text-align: center">Debit</th>
-                            <th style="vertical-align: middle; text-align: center">Kredit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($akun as $item)
-                            @php
-                                $saldo= 0; $penyesuaian = 0;
-                                switch (request('kriteria')) {
-                                    case 'periode':
-                                        switch (request('periode')) {
-                                            case '1-bulan-terakhir':
-                                                foreach ($item->jurnal_umum as $jurnal_umum) {
-                                                    if (date('Y-m',strtotime($jurnal_umum->tanggal)) == date('Y-m')) {
-                                                        if ($jurnal_umum->debit_atau_kredit == $jurnal_umum->akun->post_saldo) {
-                                                            $saldo += $jurnal_umum->nilai;
-                                                        } else {
-                                                            $saldo -= $jurnal_umum->nilai;
-                                                        }
-                                                    }
-                                                }
-
-                                                foreach ($item->jurnal_penyesuaian as $jurnal_penyesuaian) {
-                                                    if (date('Y-m',strtotime($jurnal_penyesuaian->tanggal)) == date('Y-m')) {
-                                                        $penyesuaian += $jurnal_penyesuaian->nilai;
-                                                    }
-                                                }
-
-                                                break;
-
-                                            case '1-minggu-terakhir':
-                                                foreach ($item->jurnal_umum->whereBetween('tanggal', [date('Y-m-d', strtotime('-7 day')), date('Y-m-d')]) as $jurnal_umum) {
-                                                    if ($jurnal_umum->debit_atau_kredit == $jurnal_umum->akun->post_saldo) {
-                                                        $saldo += $jurnal_umum->nilai;
-                                                    } else {
-                                                        $saldo -= $jurnal_umum->nilai;
-                                                    }
-                                                }
-
-                                                foreach ($item->jurnal_penyesuaian->whereBetween('tanggal', [date('Y-m-d', strtotime('-7 day')), date('Y-m-d')]) as $jurnal_penyesuaian) {
-                                                    $penyesuaian += $jurnal_penyesuaian->nilai;
-                                                }
-
-                                                break;
-                                        }
-                                        break;
-
-                                    case 'rentang-waktu':
-                                        foreach ($item->jurnal_umum->whereBetween('tanggal', [request('tanggal_awal'), request('tanggal_akhir')]) as $jurnal_umum) {
-                                            if ($jurnal_umum->debit_atau_kredit == $jurnal_umum->akun->post_saldo) {
-                                                $saldo += $jurnal_umum->nilai;
-                                            } else {
-                                                $saldo -= $jurnal_umum->nilai;
-                                            }
-                                        }
-
-                                        foreach ($item->jurnal_penyesuaian->whereBetween('tanggal', [request('tanggal_awal'), request('tanggal_akhir')]) as $jurnal_penyesuaian) {
-                                            $penyesuaian += $jurnal_penyesuaian->nilai;
-                                        }
-
-                                        break;
-
-                                    case 'bulan':
-                                        foreach ($item->jurnal_umum as $jurnal_umum) {
-                                            if (date('Y-m',strtotime($jurnal_umum->tanggal)) == date('Y-m', strtotime(request('bulan')))) {
-                                                if ($jurnal_umum->debit_atau_kredit == $jurnal_umum->akun->post_saldo) {
-                                                    $saldo += $jurnal_umum->nilai;
-                                                } else {
-                                                    $saldo -= $jurnal_umum->nilai;
-                                                }
-                                            }
-                                        }
-
-                                        foreach ($item->jurnal_penyesuaian as $jurnal_penyesuaian) {
-                                            if (date('Y-m',strtotime($jurnal_penyesuaian->tanggal)) == date('Y-m', strtotime(request('bulan')))) {
-                                                $penyesuaian += $jurnal_penyesuaian->nilai;
-                                            }
-                                        }
-
-                                        break;
-
-                                    default:
-                                        foreach ($item->jurnal_umum as $jurnal_umum) {
-                                            if ($jurnal_umum->debit_atau_kredit == $jurnal_umum->akun->post_saldo) {
-                                                $saldo += $jurnal_umum->nilai;
-                                            } else {
-                                                $saldo -= $jurnal_umum->nilai;
-                                            }
-                                        }
-
-                                        foreach ($item->jurnal_penyesuaian as $jurnal_penyesuaian) {
-                                            $penyesuaian += $jurnal_penyesuaian->nilai;
-                                        }
-
-                                        break;
-                                }
-
-                                if ($item->post_saldo == $item->post_penyesuaian) {
-                                    $disesuaikan = $saldo + $penyesuaian;
-                                } else {
-                                    $disesuaikan = $saldo - $penyesuaian;
-                                }
-                            @endphp
-                            <tr>
-                                <td style="vertical-align: middle; text-align: center"><a href="{{ url('/buku-besar?kode_akun=' . $item->kode . '&kriteria=periode&periode=1-bulan-terakhir') }}">{{ $item->kode }}</a></td>
-                                <td>{{ $item->nama }}</td>
-                                <td class="text-right neraca_saldo_debit">{{ $item->post_saldo == 1 ? 'Rp. ' . substr(number_format($saldo, 2, ',', '.'),0,-3) : '-' }}</td>
-                                <td class="text-right neraca_saldo_kredit">{{ $item->post_saldo == 2 ? 'Rp. ' . substr(number_format($saldo, 2, ',', '.'),0,-3) : '-' }}</td>
-                                <td class="text-right penyesuaian_debit">{{ $item->post_penyesuaian == 1 ? 'Rp. ' . substr(number_format($penyesuaian, 2, ',', '.'),0,-3) : '-' }}</td>
-                                <td class="text-right penyesuaian_kredit">{{ $item->post_penyesuaian == 2 ? 'Rp. ' . substr(number_format($penyesuaian, 2, ',', '.'),0,-3) : '-' }}</td>
-                                <td class="text-right disesuaikan_debit">{{ $item->post_saldo == 1 ? 'Rp. ' . substr(number_format($disesuaikan, 2, ',', '.'),0,-3) : '-' }}</td>
-                                <td class="text-right disesuaikan_kredit">{{ $item->post_saldo == 2 ? 'Rp. ' . substr(number_format($disesuaikan, 2, ',', '.'),0,-3) : '-' }}</td>
-                                @if ($item->post_laporan == 2)
-                                    <td class="text-right laba_rugi_debit">{{ $item->post_saldo == 1 ? 'Rp. ' . substr(number_format($disesuaikan, 2, ',', '.'),0,-3) : '-' }}</td>
-                                    <td class="text-right laba_rugi_kredit">{{ $item->post_saldo == 2 ? 'Rp. ' . substr(number_format($disesuaikan, 2, ',', '.'),0,-3) : '-' }}</td>
-                                    <td class="text-right neraca_debit">-</td>
-                                    <td class="text-right neraca_kredit">-</td>
-                                    @else
-                                    <td class="text-right laba_rugi_debit"></td>
-                                    <td class="text-right laba_rugi_kredit"></td>
-                                    <td class="text-right neraca_debit">{{ $item->post_saldo == 1 ? 'Rp. ' . substr(number_format($disesuaikan, 2, ',', '.'),0,-3) : '-' }}</td>
-                                    <td class="text-right neraca_kredit">{{ $item->post_saldo == 2 ? 'Rp. ' . substr(number_format($disesuaikan, 2, ',', '.'),0,-3) : '-' }}</td>
-                                @endif
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="15" align="center">Data tidak tersedia</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                    <tfoot class="bg-primary text-white">
-                        <tr>
-                            <th colspan="2" class="text-right">Jumlah</th>
-                            <th class="text-right" id="jumlah_neraca_saldo_debit"></th>
-                            <th class="text-right" id="jumlah_neraca_saldo_kredit"></th>
-                            <th class="text-right" id="jumlah_penyesuaian_debit"></th>
-                            <th class="text-right" id="jumlah_penyesuaian_kredit"></th>
-                            <th class="text-right" id="jumlah_disesuaikan_debit"></th>
-                            <th class="text-right" id="jumlah_disesuaikan_kredit"></th>
-                            <th class="text-right" id="jumlah_laba_rugi_debit"></th>
-                            <th class="text-right" id="jumlah_laba_rugi_kredit"></th>
-                            <th class="text-right" id="jumlah_neraca_debit"></th>
-                            <th class="text-right" id="jumlah_neraca_kredit"></th>
-                        </tr>
-                        <tr>
-                            <th colspan="2" class="text-right">Selisih</th>
-                            <th colspan="2" class="text-right" id="selisih_neraca_saldo"></th>
-                            <th colspan="2" class="text-right" id="selisih_penyesuaian"></th>
-                            <th colspan="2" class="text-right" id="selisih_disesuaikan"></th>
-                            <th colspan="2" class="text-right" id="selisih_laba_rugi"></th>
-                            <th colspan="2" class="text-right" id="selisih_neraca"></th>
-                        </tr>
-                    </tfoot>
-                </table>
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item mr-2 mb-2" role="presentation">
+                    <a class="nav-link active" id="pills-neraca-saldo-tab" data-toggle="pill" href="#pills-neraca-saldo" role="tab" aria-controls="pills-neraca-saldo" aria-selected="true">Neraca Saldo</a>
+                </li>
+                <li class="nav-item mr-2 mb-2" role="presentation">
+                    <a class="nav-link" id="pills-penyesuaian-tab" data-toggle="pill" href="#pills-penyesuaian" role="tab" aria-controls="pills-penyesuaian" aria-selected="false">Penyesuaian</a>
+                </li>
+                <li class="nav-item mr-2 mb-2" role="presentation">
+                    <a class="nav-link" id="pills-disesuaikan-tab" data-toggle="pill" href="#pills-disesuaikan" role="tab" aria-controls="pills-disesuaikan" aria-selected="false">Neraca Saldo Disesuaikan</a>
+                </li>
+                <li class="nav-item mr-2 mb-2" role="presentation">
+                    <a class="nav-link" id="pills-laba-rugi-tab" data-toggle="pill" href="#pills-laba-rugi" role="tab" aria-controls="pills-laba-rugi" aria-selected="false">Laporan Laba Rugi</a>
+                </li>
+                <li class="nav-item mr-2 mb-2" role="presentation">
+                    <a class="nav-link" id="pills-neraca-tab" data-toggle="pill" href="#pills-neraca" role="tab" aria-controls="pills-neraca" aria-selected="false">Neraca</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-neraca-saldo" role="tabpanel" aria-labelledby="pills-neraca-saldo-tab">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm table-striped table-bordered">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th rowspan="2" style="vertical-align: middle" class="text-center">Kode</th>
+                                    <th rowspan="2" style="vertical-align: middle" class="text-center">Nama</th>
+                                    <th colspan="2" class="text-center">Neraca Saldo</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Debit</th>
+                                    <th class="text-center">Kredit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($akun as $item)
+                                    @php
+                                        $data = neraca(request('kriteria'), request('periode'), request('tanggal_awal'), request('tanggal_akhir'), request('bulan'), $item);
+                                    @endphp
+                                    <tr>
+                                        <td style="vertical-align: middle; text-align: center"><a href="{{ url('/buku-besar?kode_akun=' . $item->kode . '&kriteria=periode&periode=1-bulan-terakhir') }}">{{ $item->kode }}</a></td>
+                                        <td>{{ $item->nama }}</td>
+                                        <td class="text-right neraca_saldo_debit">{{ $item->post_saldo == 1 ? 'Rp. ' . substr(number_format($data['saldo'], 2, ',', '.'),0,-3) : '-' }}</td>
+                                        <td class="text-right neraca_saldo_kredit">{{ $item->post_saldo == 2 ? 'Rp. ' . substr(number_format($data['saldo'], 2, ',', '.'),0,-3) : '-' }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="15" align="center">Data tidak tersedia</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                            <tfoot class="bg-primary text-white">
+                                <tr>
+                                    <th colspan="2" class="text-right">Jumlah</th>
+                                    <th class="text-right" id="jumlah_neraca_saldo_debit"></th>
+                                    <th class="text-right" id="jumlah_neraca_saldo_kredit"></th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" class="text-right">Selisih</th>
+                                    <th colspan="2" class="text-right" id="selisih_neraca_saldo"></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-penyesuaian" role="tabpanel" aria-labelledby="pills-penyesuaian-tab">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm table-striped table-bordered">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th rowspan="2" style="vertical-align: middle" class="text-center">Kode</th>
+                                    <th rowspan="2" style="vertical-align: middle" class="text-center">Nama</th>
+                                    <th colspan="2" class="text-center">Penyesuaian</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Debit</th>
+                                    <th class="text-center">Kredit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($akun as $item)
+                                    @php
+                                        $data = neraca(request('kriteria'), request('periode'), request('tanggal_awal'), request('tanggal_akhir'), request('bulan'), $item);
+                                    @endphp
+                                    <tr>
+                                        <td style="vertical-align: middle; text-align: center"><a href="{{ url('/buku-besar?kode_akun=' . $item->kode . '&kriteria=periode&periode=1-bulan-terakhir') }}">{{ $item->kode }}</a></td>
+                                        <td>{{ $item->nama }}</td>
+                                        <td class="text-right penyesuaian_debit">{{ $item->post_penyesuaian == 1 ? 'Rp. ' . substr(number_format($data['penyesuaian'], 2, ',', '.'),0,-3) : '-' }}</td>
+                                        <td class="text-right penyesuaian_kredit">{{ $item->post_penyesuaian == 2 ? 'Rp. ' . substr(number_format($data['penyesuaian'], 2, ',', '.'),0,-3) : '-' }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="15" align="center">Data tidak tersedia</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                            <tfoot class="bg-primary text-white">
+                                <tr>
+                                    <th colspan="2" class="text-right">Jumlah</th>
+                                    <th class="text-right" id="jumlah_penyesuaian_debit"></th>
+                                    <th class="text-right" id="jumlah_penyesuaian_kredit"></th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" class="text-right">Selisih</th>
+                                    <th colspan="2" class="text-right" id="selisih_penyesuaian"></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-disesuaikan" role="tabpanel" aria-labelledby="pills-disesuaikan-tab">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm table-striped table-bordered">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th rowspan="2" style="vertical-align: middle" class="text-center">Kode</th>
+                                    <th rowspan="2" style="vertical-align: middle" class="text-center">Nama</th>
+                                    <th colspan="2" class="text-center">Neraca Saldo Disesuaikan</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Debit</th>
+                                    <th class="text-center">Kredit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($akun as $item)
+                                    @php
+                                        $data = neraca(request('kriteria'), request('periode'), request('tanggal_awal'), request('tanggal_akhir'), request('bulan'), $item);
+                                    @endphp
+                                    <tr>
+                                        <td style="vertical-align: middle; text-align: center"><a href="{{ url('/buku-besar?kode_akun=' . $item->kode . '&kriteria=periode&periode=1-bulan-terakhir') }}">{{ $item->kode }}</a></td>
+                                        <td>{{ $item->nama }}</td>
+                                        <td class="text-right disesuaikan_debit">{{ $item->post_saldo == 1 ? 'Rp. ' . substr(number_format($data['disesuaikan'], 2, ',', '.'),0,-3) : '-' }}</td>
+                                        <td class="text-right disesuaikan_kredit">{{ $item->post_saldo == 2 ? 'Rp. ' . substr(number_format($data['disesuaikan'], 2, ',', '.'),0,-3) : '-' }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="15" align="center">Data tidak tersedia</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                            <tfoot class="bg-primary text-white">
+                                <tr>
+                                    <th colspan="2" class="text-right">Jumlah</th>
+                                    <th class="text-right" id="jumlah_disesuaikan_debit"></th>
+                                    <th class="text-right" id="jumlah_disesuaikan_kredit"></th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" class="text-right">Selisih</th>
+                                    <th colspan="2" class="text-right" id="selisih_disesuaikan"></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-laba-rugi" role="tabpanel" aria-labelledby="pills-laba-rugi-tab">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm table-striped table-bordered">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th rowspan="2" style="vertical-align: middle" class="text-center">Kode</th>
+                                    <th rowspan="2" style="vertical-align: middle" class="text-center">Nama</th>
+                                    <th colspan="2" class="text-center">Laporan Laba Rugi</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Debit</th>
+                                    <th class="text-center">Kredit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($akun as $item)
+                                    @php
+                                        $data = neraca(request('kriteria'), request('periode'), request('tanggal_awal'), request('tanggal_akhir'), request('bulan'), $item);
+                                    @endphp
+                                    <tr>
+                                        <td style="vertical-align: middle; text-align: center"><a href="{{ url('/buku-besar?kode_akun=' . $item->kode . '&kriteria=periode&periode=1-bulan-terakhir') }}">{{ $item->kode }}</a></td>
+                                        <td>{{ $item->nama }}</td>
+                                        @if ($item->post_laporan == 2)
+                                            <td class="text-right laba_rugi_debit">{{ $item->post_saldo == 1 ? 'Rp. ' . substr(number_format($data['disesuaikan'], 2, ',', '.'),0,-3) : '-' }}</td>
+                                            <td class="text-right laba_rugi_kredit">{{ $item->post_saldo == 2 ? 'Rp. ' . substr(number_format($data['disesuaikan'], 2, ',', '.'),0,-3) : '-' }}</td>
+                                        @else
+                                            <td class="text-right laba_rugi_debit">-</td>
+                                            <td class="text-right laba_rugi_kredit">-</td>
+                                        @endif
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="15" align="center">Data tidak tersedia</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                            <tfoot class="bg-primary text-white">
+                                <tr>
+                                    <th colspan="2" class="text-right">Jumlah</th>
+                                    <th class="text-right" id="jumlah_laba_rugi_debit"></th>
+                                    <th class="text-right" id="jumlah_laba_rugi_kredit"></th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" class="text-right">Selisih</th>
+                                    <th colspan="2" class="text-right" id="selisih_laba_rugi"></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-neraca" role="tabpanel" aria-labelledby="pills-neraca-tab">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm table-striped table-bordered">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th rowspan="2" style="vertical-align: middle" class="text-center">Kode</th>
+                                    <th rowspan="2" style="vertical-align: middle" class="text-center">Nama</th>
+                                    <th colspan="2" class="text-center">Neraca</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Debit</th>
+                                    <th class="text-center">Kredit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($akun as $item)
+                                    @php
+                                        $data = neraca(request('kriteria'), request('periode'), request('tanggal_awal'), request('tanggal_akhir'), request('bulan'), $item);
+                                    @endphp
+                                    <tr>
+                                        <td style="vertical-align: middle; text-align: center"><a href="{{ url('/buku-besar?kode_akun=' . $item->kode . '&kriteria=periode&periode=1-bulan-terakhir') }}">{{ $item->kode }}</a></td>
+                                        <td>{{ $item->nama }}</td>
+                                        @if ($item->post_laporan == 2)
+                                            <td class="text-right neraca_debit">-</td>
+                                            <td class="text-right neraca_kredit">-</td>
+                                        @else
+                                            <td class="text-right neraca_debit">{{ $item->post_saldo == 1 ? 'Rp. ' . substr(number_format($data['disesuaikan'], 2, ',', '.'),0,-3) : '-' }}</td>
+                                            <td class="text-right neraca_kredit">{{ $item->post_saldo == 2 ? 'Rp. ' . substr(number_format($data['disesuaikan'], 2, ',', '.'),0,-3) : '-' }}</td>
+                                        @endif
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="15" align="center">Data tidak tersedia</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                            <tfoot class="bg-primary text-white">
+                                <tr>
+                                    <th colspan="2" class="text-right">Jumlah</th>
+                                    <th class="text-right" id="jumlah_neraca_debit"></th>
+                                    <th class="text-right" id="jumlah_neraca_kredit"></th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" class="text-right">Selisih</th>
+                                    <th colspan="2" class="text-right" id="selisih_neraca"></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -284,43 +353,5 @@
             kriteria();
         });
     });
-
-    function kriteria(){
-        switch ($("#kriteria").val()) {
-            case 'periode':
-                $("#periode").show();
-                $("#rentang-waktu").hide();
-                $("#bulan").hide();
-                break;
-            case 'rentang-waktu':
-                $("#periode").hide();
-                $("#rentang-waktu").show();
-                $("#bulan").hide();
-                break;
-            case 'bulan':
-                $("#periode").hide();
-                $("#rentang-waktu").hide();
-                $("#bulan").show();
-                break;
-        }
-    }
-
-    function angka(str){
-        let res = str.replace('Rp. ','');
-        let angka = res.replaceAll('.','');
-        let nilai = parseFloat(angka);
-        if (isNaN(nilai)) {
-            nilai = 0;
-        }
-        return nilai;
-    }
-
-    function jumlah(nama){
-        let nilai = 0;
-        $(`.${nama}`).each(function () {
-            nilai += angka($(this).html());
-        });
-        return nilai;
-    }
 </script>
 @endpush

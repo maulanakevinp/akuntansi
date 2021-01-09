@@ -1,37 +1,37 @@
-document.addEventListener("keydown", function (event) {
+document.addEventListener("keydown", function(event) {
     if (event.keyCode == 27) {
         $('.alert-dismissible').remove();
         $(".modal").modal('hide');
     }
 });
 
-$(document).on("change", "input", function (event) {
+$(document).on("change", "input", function(event) {
     $(this).attr('value', this.value);
     $(this).removeClass('is-invalid');
     $(this).parent().parent().find('.invalid-feedback').remove();
     $('.alert-dismissible').remove();
 });
 
-$(document).on("change", "select", function (event) {
+$(document).on("change", "select", function(event) {
     $(this).attr('value', this.value);
     $(this).removeClass('is-invalid');
     $(this).parent().parent().find('.invalid-feedback').remove();
     $('.alert-dismissible').remove();
 });
 
-$(document).on("change", "textarea", function (event) {
+$(document).on("change", "textarea", function(event) {
     $(this).html(event.target.value);
     $(this).removeClass('is-invalid');
     $(this).parent().parent().find('.invalid-feedback').remove();
     $('.alert-dismissible').remove();
 });
 
-$(document).on("click", "input[type='checkbox']", function () {
+$(document).on("click", "input[type='checkbox']", function() {
     $(this).tooltip('hide');
     $(this).attr('checked', $(this).prop('checked'));
 });
 
-$(document).on('click', '.hapus-data', function (event) {
+$(document).on('click', '.hapus-data', function(event) {
     event.preventDefault();
     $('#modal-hapus').modal('show');
     $('#nama-hapus').html('Apakah Anda yakin ingin menghapus ' + $(this).data('nama') + '???');
@@ -98,9 +98,47 @@ function hanyaHuruf(evt) {
 function uploadImage(inputFile) {
     if (inputFile.files && inputFile.files[0]) {
         var reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function(e) {
             $(inputFile).siblings('img').attr("src", e.target.result);
         }
         reader.readAsDataURL(inputFile.files[0]);
     }
+}
+
+function kriteria() {
+    switch ($("#kriteria").val()) {
+        case 'periode':
+            $("#periode").show();
+            $("#rentang-waktu").hide();
+            $("#bulan").hide();
+            break;
+        case 'rentang-waktu':
+            $("#periode").hide();
+            $("#rentang-waktu").show();
+            $("#bulan").hide();
+            break;
+        case 'bulan':
+            $("#periode").hide();
+            $("#rentang-waktu").hide();
+            $("#bulan").show();
+            break;
+    }
+}
+
+function angka(str) {
+    let res = str.replace('Rp. ', '');
+    let angka = res.replaceAll('.', '');
+    let nilai = parseFloat(angka);
+    if (isNaN(nilai)) {
+        nilai = 0;
+    }
+    return nilai;
+}
+
+function jumlah(nama) {
+    let nilai = 0;
+    $(`.${nama}`).each(function() {
+        nilai += angka($(this).html());
+    });
+    return nilai;
 }

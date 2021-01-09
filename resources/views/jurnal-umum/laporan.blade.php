@@ -44,7 +44,7 @@
                         @endphp
                         @forelse ($jurnal_umum as $item)
                             <tr>
-                                <td class="text-center">{{ date('d F Y',strtotime($item->tanggal)) }}</td>
+                                <td class="text-center">{{ tgl($item->tanggal) }}</td>
                                 <td>{{ $item->keterangan }}</td>
                                 <td class="text-center"><a href="{{ url('/buku-besar?kode_akun=' . $item->akun->kode . '&kriteria=periode&periode=1-bulan-terakhir') }}" data-toggle="tooltip" title="{{ $item->akun->nama }}">{{ $item->akun->kode }}</a></td>
                                 <td class="text-right">
