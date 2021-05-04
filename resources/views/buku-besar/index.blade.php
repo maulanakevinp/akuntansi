@@ -129,7 +129,6 @@
                             @endforelse
                         </tbody>
                     </table>
-                    {{ $jurnal_umum->links('layouts.footers.pagination') }}
                 </div>
             </div>
         </div>
