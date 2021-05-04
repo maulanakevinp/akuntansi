@@ -61,7 +61,7 @@
                                 </td>
                                 <td style="vertical-align: middle">
                                     <a href="{{ route('jurnal-umum.edit', $item) }}?page={{ request('page') }}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
-                                    @if($item->bukti)<a href="{{ route('jurnal-umum.show', $item) }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Download Bukti"><i class="fas fa-download"></i></a>@endif
+                                    @if($item->bukti)<a target="_blank" href="{{ route('jurnal-umum.show', $item) }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Download Bukti"><i class="fas fa-download"></i></a>@endif
                                 </td>
                                 <td style="vertical-align: middle; text-align: center">{{ tgl($item->tanggal) }}</td>
                                 <td style="vertical-align: middle; white-space: normal">{{ $item->keterangan }}</td>

@@ -72,7 +72,10 @@ class JurnalUmumController extends Controller
      */
     public function show(JurnalUmum $jurnal_umum)
     {
-        return response()->download(storage_path('app/' . $jurnal_umum->bukti),$jurnal_umum->keterangan.'.'.substr(strrchr(storage_path('app/'.$jurnal_umum->bukti),'.'),1));
+        $judul = $jurnal_umum->keterangan.'.'.substr(strrchr(storage_path('app/'.$jurnal_umum->bukti),'.'),1);
+        return response()->file(storage_path('app/' . $jurnal_umum->bukti),[
+            'Content-Disposition'   => 'inline; filename="'.$judul.'"'
+        ]);
     }
 
     /**

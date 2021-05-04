@@ -61,7 +61,7 @@
                     <label class="form-control-label col-form-label col-md-3" for="bukti">
                         Bukti
                         @if($jurnal_umum->bukti)
-                            <a href="{{ route('jurnal-umum.show', $jurnal_umum) }}" data-toggle="tooltip" title="Download Bukti">
+                            <a target="_blank" href="{{ route('jurnal-umum.show', $jurnal_umum) }}" data-toggle="tooltip" title="Download Bukti">
                                 <i class="fas fa-download"></i>
                             </a>
                             <a href="{{ route('jurnal-umum.delete', $jurnal_umum) }}" data-toggle="tooltip" title="Hapus Bukti" onclick="event.preventDefault(); document.getElementById('delete-bukti').submit();">
