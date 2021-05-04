@@ -72,7 +72,7 @@ class JurnalUmumController extends Controller
      */
     public function show(JurnalUmum $jurnal_umum)
     {
-        return response()->download(storage_path('app/' . $jurnal_umum->bukti),$jurnal_umum->keterangan.'.'.substr(strrchr(storage_path('app/'.$jurnal_umum->bukti),'.'),1));
+        return response()->streamDownload(storage_path('app/' . $jurnal_umum->bukti),$jurnal_umum->keterangan.'.'.substr(strrchr(storage_path('app/'.$jurnal_umum->bukti),'.'),1));
     }
 
     /**
