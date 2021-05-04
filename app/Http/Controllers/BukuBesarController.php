@@ -63,8 +63,6 @@ class BukuBesarController extends Controller
                     return redirect($url);
                     break;
             }
-
-            $jurnal_umum->appends($request->all());
         }
 
         return view('buku-besar.index', compact('akun','jurnal_umum'));
