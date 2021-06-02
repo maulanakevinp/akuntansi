@@ -79,7 +79,7 @@
     </div>
 </div>
 
-@if ($akun && $jurnal_umum)
+@if ($akun && $jurnal)
     <div class="container-fluid mt--7">
         <div class="card shadow">
             <div class="card-header d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-between text-center text-md-left">
@@ -108,19 +108,19 @@
                             @endphp
                             @forelse ($jurnal as $item)
                                 @php
-                                    if ($item->debit_atau_kredit == $item->akun->post_saldo) {
-                                        $nilai += $item->nilai;
+                                    if ($item['debit_atau_kredit'] == $item['akun_post_saldo']) {
+                                        $nilai += $item['nilai'];
                                     } else {
-                                        $nilai -= $item->nilai;
+                                        $nilai -= $item['nilai'];
                                     }
                                 @endphp
                                 <tr>
-                                    <td class="text-center">{{ tgl($item->tanggal) }}</td>
-                                    <td>{{ $item->keterangan }}</td>
-                                    <td class="text-right">{{ $item->debit_atau_kredit == 1 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>
-                                    <td class="text-right">{{ $item->debit_atau_kredit == 2 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>
-                                    <td class="text-right">{{ $item->akun_post_saldo == 1 ? 'Rp. ' . substr(number_format($nilai, 2, ',', '.'),0,-3) : '-' }}</td>
-                                    <td class="text-right">{{ $item->akun_post_saldo == 2 ? 'Rp. ' . substr(number_format($nilai, 2, ',', '.'),0,-3) : '-' }}</td>
+                                    <td class="text-center">{{ tgl($item['tanggal']) }}</td>
+                                    <td>{{ $item['keterangan'] }}</td>
+                                    <td class="text-right">{{ $item['debit_atau_kredit'] == 1 ? 'Rp. ' . substr(number_format($item['nilai'], 2, ',', '.'),0,-3) : '-' }}</td>
+                                    <td class="text-right">{{ $item['debit_atau_kredit'] == 2 ? 'Rp. ' . substr(number_format($item['nilai'], 2, ',', '.'),0,-3) : '-' }}</td>
+                                    <td class="text-right">{{ $item['akun_post_saldo'] == 1 ? 'Rp. ' . substr(number_format($nilai, 2, ',', '.'),0,-3) : '-' }}</td>
+                                    <td class="text-right">{{ $item['akun_post_saldo'] == 2 ? 'Rp. ' . substr(number_format($nilai, 2, ',', '.'),0,-3) : '-' }}</td>
                                 </tr>
                             @empty
                                 <tr>

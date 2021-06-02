@@ -70,32 +70,33 @@ class BukuBesarController extends Controller
                     break;
             }
         }
-        $jurnal = collect();
-        
+
+        $jurnal = [];
+
         foreach($jurnal_umum as $item) {
-            $jurnal[] = collect([
+            $jurnal[] = [
                 'debit_atau_kredit' => $item->debit_atau_kredit,
                 'akun_post_saldo' => $item->akun->post_saldo,
                 'nilai' => $item->nilai,
                 'tanggal' => $item->tanggal,
                 'keterangan' => $item->keterangan,
-            ]);
-        }
-        
-        foreach($jurnal_penyesuaian as $item) {
-            $jurnal[] = collect([
-                'debit_atau_kredit' => $item->debit_atau_kredit,
-                'akun_post_saldo' => $item->akun->post_saldo,
-                'nilai' => $item->nilai,
-                'tanggal' => $item->tanggal,
-                'keterangan' => $item->keterangan,
-            ]);
+            ];
         }
 
-        usort($jurnal, function($a, $b) {
-            return $a['tanggal'] < $b['tanggal'];
+        foreach($jurnal_penyesuaian as $item) {
+            $jurnal[] = [
+                'debit_atau_kredit' => $item->debit_atau_kredit,
+                'akun_post_saldo' => $item->akun->post_saldo,
+                'nilai' => $item->nilai,
+                'tanggal' => $item->tanggal,
+                'keterangan' => $item->keterangan,
+            ];
+        }
+
+        usort($jurnal, function($a, $b) use ($request) {
+            return $request->tanggal == 1 ? $a['tanggal'] < $b['tanggal'] : $a['tanggal'] > $b['tanggal'];
         });
-        
+
         return view('buku-besar.index', compact('akun','jurnal'));
     }
 }
