@@ -26,10 +26,7 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request)
     {
-        if (auth()->user()->id == 1) {
-            return back()->withError(__('Profil gagal diperbarui dikarenakan perubahan dinonaktifkan.'));
-        }
-        auth()->user()->update($request->all());
+        auth()->user()->update(['name' => $request->name]);
         return back()->withSuccess(__('Profil berhasil diperbarui.'));
     }
 
