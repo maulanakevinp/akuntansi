@@ -106,7 +106,7 @@
                             @php
                                 $nilai = 0;
                             @endphp
-                            @forelse ($jurnal_umum as $item)
+                            @forelse ($jurnal as $item)
                                 @php
                                     if ($item->debit_atau_kredit == $item->akun->post_saldo) {
                                         $nilai += $item->nilai;
@@ -119,8 +119,8 @@
                                     <td>{{ $item->keterangan }}</td>
                                     <td class="text-right">{{ $item->debit_atau_kredit == 1 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>
                                     <td class="text-right">{{ $item->debit_atau_kredit == 2 ? 'Rp. ' . substr(number_format($item->nilai, 2, ',', '.'),0,-3) : '-' }}</td>
-                                    <td class="text-right">{{ $item->akun->post_saldo == 1 ? 'Rp. ' . substr(number_format($nilai, 2, ',', '.'),0,-3) : '-' }}</td>
-                                    <td class="text-right">{{ $item->akun->post_saldo == 2 ? 'Rp. ' . substr(number_format($nilai, 2, ',', '.'),0,-3) : '-' }}</td>
+                                    <td class="text-right">{{ $item->akun_post_saldo == 1 ? 'Rp. ' . substr(number_format($nilai, 2, ',', '.'),0,-3) : '-' }}</td>
+                                    <td class="text-right">{{ $item->akun_post_saldo == 2 ? 'Rp. ' . substr(number_format($nilai, 2, ',', '.'),0,-3) : '-' }}</td>
                                 </tr>
                             @empty
                                 <tr>
