@@ -98,10 +98,6 @@ php artisan serve
 ```
 - Lalu ctrl+klik pada http://127.0.0.0:8000
 
-Login Admin http://127.0.0.0:8000/masuk <br>
-email : admin@gmail.com <br>
-password : asdqwe123
-
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
