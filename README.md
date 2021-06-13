@@ -1,11 +1,106 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
+
+## Cara Install Project DENGAN github desktop
+Untuk menginstal project ini anda harus memiliki Composer
+bagi yang belum install composer silahkan download [Klik di sini](https://getcomposer.org/download/1.9.0/composer.phar) tutorial cara instal composer [klik di sini](https://www.malasngoding.com/cara-install-composer/)
+
+Bagi yang sudah memiliki composer silahkan ikuti tutor dibawah ini
+- Klik tombol Clone or download
+- Klik Open in desktop
+- Klik open GithubDesktop.exe
+- Silahkan pilih lokasi path yang anda inginkan
+- Kemudian klik Clone
+- Tunggu sampai proses clone selesai
+- Buka folder porject yang sudah di clone melalui terminal
+- Lakukan composer install ketik
+```terminal
+composer install
+```
+- Tunggu sampai proses selesai
+- Buat database baru di phpmyadmin anda beri nama sesuka hati anda
+- Copy file .env.example yang ada di dalam folder project dan ubah namanya menjadi .env
+bagi yang menggunakan git bash atau terminal linux bisa ketik seperti dibawah
+```terminal
+cp .env.example .env
+```
+bagi yang menggunakan terminal windows bisa ketik seperti dibawah
+```terminal
+copy .env.example .env
+```
+- Lakukan generate key ketik 
+```terminal
+php artisan key:generate
+```
+- Buka file .env
+- Ubah konfigurasi database sesuai nama database yang anda buat tadi lalu simpan
+- lakukan migrate ketik :
+```terminal
+php artisan migrate --seed
+```
+- kemudian ketik :
+```
+php artisan storage:link
+```
+- Finish project laravel bisa dijalankan dengan menggunakan development server dengan cara ketik
+```terminal
+php artisan serve
+```
+- Lalu ctrl+klik pada http://127.0.0.0:8000
+
+## Cara instal project TANPA github desktop
+Bagi yang sudah memiliki composer silahkan ikuti tutor dibawah ini
+- Klik tombol Clone or download
+- Klik download zip
+- Silahkan pilih lokasi path yang anda inginkan
+- Kemudian klik Oke
+- Tunggu sampai proses download selesai
+- Extract here 
+- Buka folder porject yang sudah di extract dengan terminal
+- Lakukan composer install ketik
+```terminal
+composer install
+```
+- Tunggu sampai proses selesai
+- Buat database baru di phpmyadmin anda beri nama sesuka hati anda
+- Copy file .env.example yang ada di dalam folder project dan ubah namanya menjadi .env
+bagi yang menggunakan git bash atau terminal linux bisa ketik seperti dibawah
+```terminal
+cp .env.example .env
+```
+bagi yang menggunakan terminal windows bisa ketik seperti dibawah
+```terminal
+copy .env.example .env
+```
+- Lakukan generate key ketik 
+```terminal
+php artisan key:generate
+```
+- Buka file .env
+- Ubah konfigurasi database sesuai nama database yang anda buat tadi lalu simpan
+- lakukan migrate ketik :
+```terminal
+php artisan migrate --seed
+```
+- kemudian ketik :
+```
+php artisan storage:link
+```
+- Finish project laravel bisa dijalankan dengan menggunakan development server dengan cara ketik
+```terminal
+php artisan serve
+```
+- Lalu ctrl+klik pada http://127.0.0.0:8000
+
+Login Admin http://127.0.0.0:8000/masuk <br>
+email : admin@gmail.com <br>
+password : asdqwe123
 
 ## About Laravel
 
@@ -31,8 +126,6 @@ If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Lar
 
 We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
-
 - **[Vehikl](https://vehikl.com/)**
 - **[Tighten Co.](https://tighten.co)**
 - **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
@@ -42,7 +135,27 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - **[Many](https://www.many.co.uk)**
 - **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
 - **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+- [UserInsights](https://userinsights.com)
+- [Fragrantica](https://www.fragrantica.com)
+- [SOFTonSOFA](https://softonsofa.com/)
+- [User10](https://user10.com)
+- [Soumettre.fr](https://soumettre.fr/)
+- [CodeBrisk](https://codebrisk.com)
+- [1Forge](https://1forge.com)
+- [TECPRESSO](https://tecpresso.co.jp/)
+- [Runtime Converter](http://runtimeconverter.com/)
+- [WebL'Agence](https://weblagence.com/)
+- [Invoice Ninja](https://www.invoiceninja.com)
+- [iMi digital](https://www.imi-digital.de/)
+- [Earthlink](https://www.earthlink.ro/)
+- [Steadfast Collective](https://steadfastcollective.com/)
+- [We Are The Robots Inc.](https://watr.mx/)
+- [Understand.io](https://www.understand.io/)
+- [Abdel Elrafa](https://abdelelrafa.com)
+- [Hyper Host](https://hyper.host)
+- [Appoly](https://www.appoly.co.uk)
+- [OP.GG](https://op.gg)
+- [云软科技](http://www.yunruan.ltd/)
 
 ## Contributing
 
